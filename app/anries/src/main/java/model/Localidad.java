@@ -6,7 +6,7 @@ public class Localidad {
     public Localidad() {
     }
 
-    public Localidad(String nombre, Provincia provincia) {
+    public Localidad(String nombre) {
         this.nombre = nombre;
     }
 
@@ -16,5 +16,9 @@ public class Localidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public static void registrar(String nombre) {
+        Localidad localidad = new Localidad(nombre);
     }
 }
