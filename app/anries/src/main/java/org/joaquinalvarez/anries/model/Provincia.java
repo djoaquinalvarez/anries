@@ -1,4 +1,4 @@
-package model;
+package org.joaquinalvarez.anries.model;
 
 import java.util.ArrayList;
 

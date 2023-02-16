@@ -1,4 +1,4 @@
-package model;
+package org.joaquinalvarez.anries.model;
 
 public class Articulo {
     private String nombre;

@@ -1,4 +1,4 @@
-package model;
+package org.joaquinalvarez.anries.model;
 
 public class Cliente extends Persona{
     private Integer nroCliente;

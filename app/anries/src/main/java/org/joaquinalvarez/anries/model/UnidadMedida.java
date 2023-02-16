@@ -1,14 +1,13 @@
-package model;
+package org.joaquinalvarez.anries.model;
 
-public class Rol {
+public class UnidadMedida {
     private String nombre;
     private String descripcion;
 
-
-    public Rol() {
+    public UnidadMedida() {
     }
 
-    public Rol(String nombre, String descripcion) {
+    public UnidadMedida(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

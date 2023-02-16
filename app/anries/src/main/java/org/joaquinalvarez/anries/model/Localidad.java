@@ -1,4 +1,7 @@
-package model;
+package org.joaquinalvarez.anries.model;
+
+import org.joaquinalvarez.anries.dao.DAOLocalidadImpl;
+import org.joaquinalvarez.anries.interfaces.DAOLocalidad;
 
 public class Localidad {
     private String nombre;
@@ -20,5 +23,11 @@ public class Localidad {
 
     public static void registrar(String nombre) {
         Localidad localidad = new Localidad(nombre);
+        DAOLocalidad dao = new DAOLocalidadImpl();
+        try {
+            dao.registrar(localidad);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

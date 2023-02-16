@@ -1,4 +1,4 @@
-package model;
+package org.joaquinalvarez.anries.model;
 
 public class Marca {
     private String nombre;

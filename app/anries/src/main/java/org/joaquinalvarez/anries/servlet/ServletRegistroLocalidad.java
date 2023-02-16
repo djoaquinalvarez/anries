@@ -36,12 +36,14 @@ public class FormServlet extends HttpServlet {
                 out.print("    </head>");
                 out.print("    <body>");
                 out.print("        <h1>Localidad de " + nombre + " registrada con éxito</h1>");
+                out.print("        <div>");
+                out.print("             <a href='#'>Volver</a>");
+                out.print("             <a href='#'>Registrar otra localidad</a>");
+                out.print("        </div>");
                 out.print("    </body>");
                 out.print("</html>");
             }
         }
-
-        super.doPost(req, resp);
     }
 
     public void registrarLocalidad(String nombre) {
