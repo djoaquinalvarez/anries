@@ -1,11 +1,11 @@
-package org.joaquinalvarez.anries.form;
+package org.joaquinalvarez.anries.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Localidad;
+import org.joaquinalvarez.anries.model.Localidad;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/form_registro-localidad")
-public class FormServlet extends HttpServlet {
+public class ServletRegistroLocalidad extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
