@@ -33,12 +33,13 @@ public class ServletRegistroLocalidad extends HttpServlet {
                 out.print("    <head>");
                 out.print("        <meta charset=\"UTF-8\">");
                 out.print("        <title>Registro Localidad</title>");
+                out.print("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi\" crossorigin=\"anonymous\">\n");
                 out.print("    </head>");
                 out.print("    <body>");
                 out.print("        <h1>Localidad de " + nombre + " registrada con éxito</h1>");
                 out.print("        <div>");
-                out.print("             <a href='#'>Volver</a>");
-                out.print("             <a href='#'>Registrar otra localidad</a>");
+                out.print("             <a href='http://localhost:8080/anries' class='btn btn-secondary'>Volver</a>");
+                out.print("             <a href='http://localhost:8080/anries' class='btn btn-primary'>Registrar otra localidad</a>");
                 out.print("        </div>");
                 out.print("    </body>");
                 out.print("</html>");
