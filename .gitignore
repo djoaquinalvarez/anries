@@ -1,5 +1,5 @@
 #Ignora todos los archivos .class
-*.class
+app/anries/target/*.class
 
 #Ignora todos los archivos .war
 *.war
