@@ -1,0 +1,5 @@
+#Ignora todos los archivos .class
+*.class
+
+#Ignora todos los archivos .war
+*.war
