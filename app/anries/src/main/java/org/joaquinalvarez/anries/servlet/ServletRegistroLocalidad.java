@@ -39,7 +39,7 @@ public class ServletRegistroLocalidad extends HttpServlet {
                 out.print("        <h1>Localidad de " + nombre + " registrada con éxito</h1>");
                 out.print("        <div>");
                 out.print("             <a href='http://localhost:8080/anries' class='btn btn-secondary'>Volver</a>");
-                out.print("             <a href='http://localhost:8080/anries' class='btn btn-primary'>Registrar otra localidad</a>");
+                out.print("             <a href='http://localhost:8080/anries/form_localidades.jsp' class='btn btn-primary'>Registrar otra localidad</a>");
                 out.print("        </div>");
                 out.print("    </body>");
                 out.print("</html>");
