@@ -2,6 +2,7 @@
 <%@page import="java.util.Map"%>
 <%
 Map<String, String> errores = (Map<String, String>)request.getAttribute("errores");
+String confirmacion = (String)request.getAttribute("confirmacion");
 %>
 
 <!DOCTYPE html>
@@ -23,15 +24,6 @@ Map<String, String> errores = (Map<String, String>)request.getAttribute("errores
     <div id="navbar-template"></div>
     <h3 class="mt-5 ms-5 mb-4">Formulario de Localidades</h3>
 
-    <%
-    if(errores != null && errores.size()>0) {
-    %>
-    <ul class="alert alert-danger mx-5">
-        <% for(String error: errores.values()) {%>
-        <li><%=error%></li>
-        <%}%>
-    </ul>
-    <% } %>
     <div>
         <form action="/anries/form_registro-localidad" method="post" class="w-75 ms-5">
             <div class="mb-4 ms-4">
@@ -39,7 +31,10 @@ Map<String, String> errores = (Map<String, String>)request.getAttribute("errores
                 <input type="text" name="nombreLocalidad" id="nombreLocalidad" class="form-control w-50 mb-3" placeholder="Inserte un nombre..." value="${param.nombreLocalidad}">
                 <%
                 if(errores != null && errores.containsKey("nombreLocalidad")) {
-                out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombreLocalidad") + "</small>");
+                    out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombreLocalidad") + "</small>");
+                }
+                if(confirmacion != null){
+                    out.println("<small class='alert alert-success d-block w-50'>" + confirmacion + "</small>");
                 }
                 %>
                 <input type="submit" value="Enviar" class="btn btn-outline-primary mt-2">
