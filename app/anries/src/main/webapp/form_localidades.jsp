@@ -1,5 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="org.joaquinalvarez.anries.dao.DAOProvinciaImpl"%>
+<%@page import="org.joaquinalvarez.anries.interfaces.DAOProvincia"%>
+<%@page import="org.joaquinalvarez.anries.model.Provincia"%>
 <%
 Map<String, String> errores = (Map<String, String>)request.getAttribute("errores");
 String confirmacion = (String)request.getAttribute("confirmacion");
@@ -33,10 +40,29 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 if(errores != null && errores.containsKey("nombreLocalidad")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombreLocalidad") + "</small>");
                 }
-                if(confirmacion != null){
-                    out.println("<small class='alert alert-success d-block w-50'>" + confirmacion + "</small>");
-                }
                 %>
+
+
+                <label for="provincia" class="form-label">Provincia</label>
+                <select id="provincia" name="provincia" class="form-select w-50 mb-3" aria-label="Default select example">
+                    <option selected>Seleccione una provincia</option>
+                    <%
+                        List<Provincia> provincias = new ArrayList<>();
+                        DAOProvincia daoProvincia = new DAOProvinciaImpl();
+                        provincias = daoProvincia.listar();
+                        for(Provincia provincia: provincias) { %>
+                            <%System.out.println("Nombre de la provincia: " + provincia.getNombre());%>
+                            <option value=<%=provincia.getNombre()%>><%=provincia.getNombre()%></option>
+                        <%}%>
+                </select>
+
+                <!-- Mensaje de confirmacion de registro-->
+                <%
+                    if(confirmacion != null){
+                    out.println("<small class='alert alert-success d-block w-50'>" + confirmacion + "</small>");
+                    }
+                %>
+
                 <input type="submit" value="Enviar" class="btn btn-outline-primary mt-2">
             </div>
 
