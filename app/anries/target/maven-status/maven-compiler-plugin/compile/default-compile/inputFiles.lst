@@ -6,6 +6,7 @@ C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\s
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Rol.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Empleado.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Persona.java
+C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\dao\DAOProvinciaImpl.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Cliente.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Provincia.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\dao\Conexion.java
@@ -15,4 +16,5 @@ C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\s
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\DetalleVenta.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\interfaces\DAOLocalidad.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Venta.java
+C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\interfaces\DAOProvincia.java
 C:\Users\Usuario\Desktop\Escritorio\Programacion\Codigo Java\anries\app\anries\src\main\java\org\joaquinalvarez\anries\model\Articulo.java

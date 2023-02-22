@@ -19,17 +19,26 @@ public class ServletRegistroLocalidad extends HttpServlet {
         resp.setContentType("text/html");
 
         String nombre = req.getParameter("nombreLocalidad");
+        String provincia = req.getParameter("provincia");
+
         Map<String, String> errores = new HashMap<>();
         String mensajeConfirmacionRegistro;
 
         if(nombre == null || nombre.equals("")) {
             errores.put("nombreLocalidad", "El nombre de la localidad es requerido.");
         }
+        if(provincia == null || provincia.equals("")) {
+            errores.put("provincia", "La provincia es requerida.");
+        }
 
 
 
         if(errores.isEmpty()) {
-            registrarLocalidad(nombre);
+            try {
+                registrarLocalidad(nombre, provincia);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             try(PrintWriter out = resp.getWriter()) {
                 mensajeConfirmacionRegistro =  "La localidad '" + nombre  + "' ha sido registrada correctamente.";
                 req.setAttribute("confirmacion", mensajeConfirmacionRegistro);
@@ -65,7 +74,7 @@ public class ServletRegistroLocalidad extends HttpServlet {
         }
     }
 
-    public void registrarLocalidad(String nombre) {
-        Localidad.registrar(nombre);
+    public void registrarLocalidad(String nombre, String provincia) throws Exception {
+        Localidad.registrar(nombre, provincia);
     }
 }

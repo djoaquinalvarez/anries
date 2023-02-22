@@ -1,9 +1,15 @@
 package org.joaquinalvarez.anries.model;
 
 import org.joaquinalvarez.anries.dao.DAOLocalidadImpl;
+import org.joaquinalvarez.anries.dao.DAOProvinciaImpl;
 import org.joaquinalvarez.anries.interfaces.DAOLocalidad;
+import org.joaquinalvarez.anries.interfaces.DAOProvincia;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class Localidad {
+    private Integer id;
     private String nombre;
 
     public Localidad() {
@@ -11,6 +17,14 @@ public class Localidad {
 
     public Localidad(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -21,13 +35,22 @@ public class Localidad {
         this.nombre = nombre;
     }
 
-    public static void registrar(String nombre) {
-        Localidad localidad = new Localidad(nombre);
-        DAOLocalidad dao = new DAOLocalidadImpl();
-        try {
-            dao.registrar(localidad);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public static void registrar(String nombre, String nombreProvincia) throws Exception {
+        Localidad localidad = new Localidad(nombre); //creamos la instancia de localidad
+        DAOProvincia daoProvincia = new DAOProvinciaImpl(); //instanciamos un daoProvincia para obtener el id de la provincia seleccionada
+        Stream<Provincia> streamProvincia = daoProvincia.listar().stream();
+        //buscamos el id de la provincia seleccionada
+        Optional<Integer> idProvincia= streamProvincia.filter(p -> p.getNombre().equals(nombreProvincia))
+                .map(Provincia::getId)
+                .findFirst();
+
+        DAOLocalidad daoLocalidad = new DAOLocalidadImpl(); //instanciamos un daoLocalidad para registrar la localidad
+        idProvincia.ifPresent(idProv -> {
+            try {
+                daoLocalidad.registrar(localidad, idProv);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

@@ -1,4 +1,5 @@
 org\joaquinalvarez\anries\model\Articulo.class
+org\joaquinalvarez\anries\interfaces\DAOProvincia.class
 org\joaquinalvarez\anries\servlet\ServletRegistroLocalidad.class
 org\joaquinalvarez\anries\model\Rol.class
 org\joaquinalvarez\anries\dao\Conexion.class
@@ -13,6 +14,7 @@ org\joaquinalvarez\anries\model\Venta.class
 org\joaquinalvarez\anries\model\Cliente.class
 org\joaquinalvarez\anries\model\Proveedor.class
 org\joaquinalvarez\anries\model\UnidadMedida.class
+org\joaquinalvarez\anries\dao\DAOProvinciaImpl.class
 org\joaquinalvarez\anries\model\Compra.class
 org\joaquinalvarez\anries\model\DetalleCompra.class
 org\joaquinalvarez\anries\model\Provincia.class

@@ -3,6 +3,7 @@ package org.joaquinalvarez.anries.model;
 import java.util.ArrayList;
 
 public class Provincia {
+    private Integer id;
     private String nombre;
     private ArrayList<Localidad> localidades;
 
@@ -13,6 +14,14 @@ public class Provincia {
 
     public Provincia() {
         this.localidades = new ArrayList<>();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

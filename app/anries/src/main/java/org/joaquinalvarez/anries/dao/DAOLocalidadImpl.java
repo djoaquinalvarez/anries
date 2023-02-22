@@ -14,14 +14,21 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
 
 
     @Override
-    public void registrar(Localidad localidad) throws Exception {
+    public void registrar(Localidad localidad, Integer idProvincia) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO Localidad(nombre) VALUES(?)");
+            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO Localidad(nombre, provincia_id) VALUES(?, ?)");
             conexion.setAutoCommit(false); //iniciamos la transaccion
             stmt.setString(1, localidad.getNombre());
+            stmt.setInt(2, idProvincia);
             stmt.executeUpdate();
             conexion.commit();
+
+            //conseguimos el id del objeto registrado
+            PreparedStatement stmt2 = this.conexion.prepareStatement("SELECT localidad_id FROM localidad WHERE nombre = ?");
+            ResultSet rs = stmt2.executeQuery();
+            localidad.setId(rs.getInt("localidad_id"));
+            System.out.println("Id de la localidad registrada: " + localidad.getId());
         }catch(SQLException e) {
             e.printStackTrace();
             conexion.rollback();
@@ -35,11 +42,14 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
         try{
             this.conectar();
             PreparedStatement stmt = this.conexion.prepareStatement("UPDATE Localidad SET nombreLocalidad = ? WHERE nombreLocalidad = ?");
+            conexion.setAutoCommit(false);
             stmt.setString(1, localidad.getNombre());
-            stmt.setString(2, localidad.getNombre());
+            stmt.setInt(2, localidad.getId());
             stmt.executeUpdate();
+            conexion.commit();
         }catch(Exception e) {
-            throw e;
+            conexion.rollback();
+            e.printStackTrace();
         }finally {
             this.cerrar();
         }
@@ -50,8 +60,8 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     public void eliminar(Localidad localidad) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("DELETE from Localidad WHERE nombreLocalidad = ?");
-            stmt.setString(1, localidad.getNombre());
+            PreparedStatement stmt = this.conexion.prepareStatement("DELETE from Localidad WHERE localidad_id = ?");
+            stmt.setInt(1, localidad.getId());
             stmt.executeUpdate();
         }catch(Exception e) {
             throw e;
@@ -67,6 +77,7 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
         try{
             this.conectar();
             PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM Localidad");
+            conexion.setAutoCommit(false);
             localidades = new ArrayList<>();
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -74,11 +85,13 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
                 localidad.setNombre(rs.getString("nombreLocalidad"));
                 localidades.add(localidad);
             }
+            stmt.executeUpdate();
+            conexion.commit();
             rs.close();
             stmt.close();
-            stmt.executeUpdate();
-        }catch(Exception e) {
-            throw e;
+        }catch(SQLException e) {
+            conexion.rollback();
+            e.printStackTrace();
         }finally {
             this.cerrar();
         }
