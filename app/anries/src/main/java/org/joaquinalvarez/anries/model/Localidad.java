@@ -5,6 +5,7 @@ import org.joaquinalvarez.anries.dao.DAOProvinciaImpl;
 import org.joaquinalvarez.anries.interfaces.DAOLocalidad;
 import org.joaquinalvarez.anries.interfaces.DAOProvincia;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -40,17 +41,21 @@ public class Localidad {
         DAOProvincia daoProvincia = new DAOProvinciaImpl(); //instanciamos un daoProvincia para obtener el id de la provincia seleccionada
         Stream<Provincia> streamProvincia = daoProvincia.listar().stream();
         //buscamos el id de la provincia seleccionada
-        Optional<Integer> idProvincia= streamProvincia.filter(p -> p.getNombre().equals(nombreProvincia))
-                .map(Provincia::getId)
+        Optional<Provincia> provinciaDeLocalidad= streamProvincia.filter(p -> p.getNombre().equals(nombreProvincia))
                 .findFirst();
 
         DAOLocalidad daoLocalidad = new DAOLocalidadImpl(); //instanciamos un daoLocalidad para registrar la localidad
-        idProvincia.ifPresent(idProv -> {
+        provinciaDeLocalidad.ifPresent(provincia -> {
             try {
-                daoLocalidad.registrar(localidad, idProv);
+                daoLocalidad.registrar(localidad, provincia.getId());
+                localidad.setId(daoLocalidad.buscarLocalidadPorNombre(localidad.getNombre()).getId());
+                provincia.getLocalidades().add(localidad.getId());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
+        //buscamos el id del elemento registrado y lo guardamos en el objeto
+
     }
+
 }

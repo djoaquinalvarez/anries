@@ -10,5 +10,6 @@ public interface DAOLocalidad {
     public void modificar(Localidad localidad) throws Exception;
     public void eliminar(Localidad localidad) throws Exception;
     public List<Localidad> listar() throws Exception;
+    public Localidad buscarLocalidadPorNombre(String nombre) throws Exception;
 
 }

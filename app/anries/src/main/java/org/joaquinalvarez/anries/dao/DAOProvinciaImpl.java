@@ -3,9 +3,11 @@ package org.joaquinalvarez.anries.dao;
 import org.joaquinalvarez.anries.interfaces.DAOProvincia;
 import org.joaquinalvarez.anries.model.Provincia;
 
+import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,9 +76,10 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
                 Provincia provincia = new Provincia();
                 provincia.setId(rs.getInt("provincia_id"));
                 provincia.setNombre(rs.getString("nombre"));
+                provincia.setLocalidades(buscarLocalidadesDeProvincia(provincia.getId()));
+                System.out.println("REGISTRAMOS EL ID EN LA PROVINCIA: " + provincia.getLocalidades());
                 provincias.add(provincia);
             }
-            stmt.executeUpdate();
             conexion.commit();
             rs.close();
             stmt.close();
@@ -87,5 +90,32 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
             this.cerrar();
         }
         return provincias;
+    }
+
+    @Override
+    public Provincia buscarProvinciaPorNombre(String nombre) throws Exception {
+        this.conectar();
+        PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM Provincia WHERE nombre = ?");
+        stmt.setString(1, nombre);
+        ResultSet rs = stmt.executeQuery();
+        Provincia provincia = new Provincia();
+        provincia.setId(rs.getInt("provincia_id"));
+        provincia.setNombre(rs.getString("nombre"));
+        provincia.setLocalidades(buscarLocalidadesDeProvincia(provincia.getId()));
+        return provincia;
+    }
+
+    public ArrayList<Integer> buscarLocalidadesDeProvincia(Integer idProvincia) throws Exception {
+        ArrayList<Integer> localidades = new ArrayList<>();
+        this.conectar();
+        System.out.println("LLEGAMOS AL BUSCAR LOCALIDADES");
+        PreparedStatement stmt = this.conexion.prepareStatement("SELECT localidad_id FROM Localidad JOIN Provincia ON (Localidad.provincia_id = ?)");
+        System.out.println("PASAMOS AL BUSCAR LOCALIDADES");
+        stmt.setInt(1, idProvincia);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()) {
+            localidades.add(rs.getInt("localidad_id"));
+        }
+        return localidades;
     }
 }

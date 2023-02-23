@@ -87,27 +87,12 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 List<Localidad> localidades = new ArrayList<>();
                 DAOLocalidad daoLocalidad = new DAOLocalidadImpl();
                 localidades = daoLocalidad.listar();
-                ArrayList<Integer> localidadesDeCordoba = new ArrayList<>();
-                ArrayList<Integer> localidadesDeSantaFe = new ArrayList<>();
-                    localidadesDeCordoba.add(9);
-                    localidadesDeCordoba.add(10);
-                    localidadesDeCordoba.add(11);
-                    localidadesDeCordoba.add(12);
-                    localidadesDeCordoba.add(13);
-                    localidadesDeSantaFe.add(9);
-                        Integer count = 0;
                     for(Localidad localidad: localidades) {
                         for(Provincia provincia: provincias) {
-                            if(count == 0) {
-                                provincia.setLocalidades(localidadesDeCordoba);
-                                count++;
-                            }else{
-                                provincia.setLocalidades(localidadesDeSantaFe);
-                                count = 0;
-                            }
-
+                            System.out.println("Listado de localidades: " + provincia.getLocalidades());
                             if(provincia.getLocalidades().contains(localidad.getId())) {
-                                System.out.println("Para la localidad de " + localidad.getNombre() + "tenemos la provincia de " + provincia.getNombre());%>
+                                System.out.println("ID Localidad: " + localidad.getId() + "|| ID Localidad en Provincia: " + provincia.getId());
+                                %>
                                 <tr>
                                     <th scope="row"><%=localidad.getId()%></th>
                                     <td><%=localidad.getNombre()%></td>

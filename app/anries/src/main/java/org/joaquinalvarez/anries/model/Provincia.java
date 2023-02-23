@@ -1,5 +1,8 @@
 package org.joaquinalvarez.anries.model;
 
+import org.joaquinalvarez.anries.dao.DAOProvinciaImpl;
+import org.joaquinalvarez.anries.interfaces.DAOProvincia;
+
 import java.util.ArrayList;
 
 public class Provincia {
@@ -38,5 +41,14 @@ public class Provincia {
 
     public void setLocalidades(ArrayList<Integer> localidades) {
         this.localidades = localidades;
+    }
+
+    public static void registrar(String nombreProvincia) throws Exception {
+        Provincia provincia = new Provincia();
+        provincia.setNombre(nombreProvincia);
+        DAOProvincia daoProvincia = new DAOProvinciaImpl();
+        daoProvincia.registrar(provincia);
+        //buscamos el id del elemento registrado y lo guardamos en el objeto
+        provincia.setId(daoProvincia.buscarProvinciaPorNombre(provincia.getNombre()).getId());
     }
 }

@@ -17,7 +17,7 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     public void registrar(Localidad localidad, Integer idProvincia) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO Localidad(nombre, provincia_id) VALUES(?, ?)");
+            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO anries.dbo.localidad(nombre, provincia_id) VALUES(?, ?)");
             conexion.setAutoCommit(false); //iniciamos la transaccion
             stmt.setString(1, localidad.getNombre());
             stmt.setInt(2, idProvincia);
@@ -41,7 +41,7 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     public void modificar(Localidad localidad) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("UPDATE Localidad SET nombreLocalidad = ? WHERE nombreLocalidad = ?");
+            PreparedStatement stmt = this.conexion.prepareStatement("UPDATE anries.dbo.localidad SET nombreLocalidad = ? WHERE nombreLocalidad = ?");
             conexion.setAutoCommit(false);
             stmt.setString(1, localidad.getNombre());
             stmt.setInt(2, localidad.getId());
@@ -60,7 +60,7 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     public void eliminar(Localidad localidad) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("DELETE from Localidad WHERE localidad_id = ?");
+            PreparedStatement stmt = this.conexion.prepareStatement("DELETE from anries.dbo.localidad WHERE localidad_id = ?");
             stmt.setInt(1, localidad.getId());
             stmt.executeUpdate();
         }catch(Exception e) {
@@ -76,7 +76,7 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
         List<Localidad> localidades = null;
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM Localidad");
+            PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM anries.dbo.localidad");
             conexion.setAutoCommit(false);
             localidades = new ArrayList<>();
             ResultSet rs = stmt.executeQuery();
@@ -97,5 +97,19 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
             this.cerrar();
         }
         return localidades;
+    }
+
+    @Override
+    public Localidad buscarLocalidadPorNombre(String nombre) throws Exception {
+        this.conectar();
+        PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM anries.dbo.localidad WHERE nombre = ?");
+        stmt.setString(1, nombre);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        Localidad localidad = new Localidad();
+        localidad.setId(rs.getInt("localidad_id"));
+        localidad.setNombre(rs.getString("nombre"));
+
+        return localidad;
     }
 }

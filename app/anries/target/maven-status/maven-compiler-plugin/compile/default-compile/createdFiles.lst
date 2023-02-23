@@ -10,6 +10,7 @@ org\joaquinalvarez\anries\interfaces\DAOLocalidad.class
 org\joaquinalvarez\anries\model\Marca.class
 org\joaquinalvarez\anries\model\Empleado.class
 org\joaquinalvarez\anries\model\Persona.class
+org\joaquinalvarez\anries\servlet\ServletRegistroProvincia.class
 org\joaquinalvarez\anries\model\Localidad.class
 org\joaquinalvarez\anries\model\Venta.class
 org\joaquinalvarez\anries\model\Cliente.class

@@ -10,5 +10,7 @@ public interface DAOProvincia {
     public void modificar(Provincia provincia) throws Exception;
     public void eliminar(Provincia provincia) throws Exception;
     public List<Provincia> listar() throws Exception;
+    public Provincia buscarProvinciaPorNombre(String nombre) throws Exception;
+    public List<Integer> buscarLocalidadesDeProvincia(Integer idProvincia) throws Exception;
 
 }
