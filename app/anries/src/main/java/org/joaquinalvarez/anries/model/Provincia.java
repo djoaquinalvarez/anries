@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Provincia {
     private Integer id;
     private String nombre;
-    private ArrayList<Localidad> localidades;
+    private ArrayList<Integer> localidades;
 
-    public Provincia(String nombre, ArrayList<Localidad> localidades) {
+    public Provincia(String nombre, ArrayList<Integer> localidades) {
         this.nombre = nombre;
         this.localidades = localidades;
     }
@@ -32,11 +32,11 @@ public class Provincia {
         this.nombre = nombre;
     }
 
-    public ArrayList<Localidad> getLocalidades() {
+    public ArrayList<Integer> getLocalidades() {
         return localidades;
     }
 
-    public void setLocalidades(ArrayList<Localidad> localidades) {
+    public void setLocalidades(ArrayList<Integer> localidades) {
         this.localidades = localidades;
     }
 }

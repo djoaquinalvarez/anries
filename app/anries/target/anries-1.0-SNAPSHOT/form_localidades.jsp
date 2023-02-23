@@ -4,9 +4,14 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.stream.Stream"%>
+<%@page import="java.util.Optional"%>
 <%@page import="org.joaquinalvarez.anries.dao.DAOProvinciaImpl"%>
+<%@page import="org.joaquinalvarez.anries.dao.DAOLocalidadImpl"%>
 <%@page import="org.joaquinalvarez.anries.interfaces.DAOProvincia"%>
+<%@page import="org.joaquinalvarez.anries.interfaces.DAOLocalidad"%>
 <%@page import="org.joaquinalvarez.anries.model.Provincia"%>
+<%@page import="org.joaquinalvarez.anries.model.Localidad"%>
 <%
 Map<String, String> errores = (Map<String, String>)request.getAttribute("errores");
 String confirmacion = (String)request.getAttribute("confirmacion");
@@ -31,11 +36,11 @@ String confirmacion = (String)request.getAttribute("confirmacion");
     <div id="navbar-template"></div>
     <h3 class="mt-5 ms-5 mb-4">Formulario de Localidades</h3>
 
-    <div>
-        <form action="/anries/form_registro-localidad" method="post" class="w-75 ms-5">
+    <div class="d-flex flex-row ms-5 me-5">
+        <form action="/anries/form_registro-localidad" method="post" class="w-50 d-inline-block">
             <div class="mb-4 ms-4">
                 <label for="nombreLocalidad" class="form-label">Nombre</label>
-                <input type="text" name="nombreLocalidad" id="nombreLocalidad" class="form-control w-50 mb-3" placeholder="Inserte un nombre..." value="${param.nombreLocalidad}">
+                <input type="text" name="nombreLocalidad" id="nombreLocalidad" class="form-control w-75 mb-3" placeholder="Inserte un nombre..." value="${param.nombreLocalidad}">
                 <%
                 if(errores != null && errores.containsKey("nombreLocalidad")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombreLocalidad") + "</small>");
@@ -44,7 +49,7 @@ String confirmacion = (String)request.getAttribute("confirmacion");
 
 
                 <label for="provincia" class="form-label">Provincia</label>
-                <select id="provincia" name="provincia" class="form-select w-50 mb-3" aria-label="Default select example">
+                <select id="provincia" name="provincia" class="form-select w-75 mb-3" aria-label="Default select example">
                     <option selected>Seleccione una provincia</option>
                     <%
                         List<Provincia> provincias = new ArrayList<>();
@@ -52,14 +57,14 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                         provincias = daoProvincia.listar();
                         for(Provincia provincia: provincias) { %>
                             <%System.out.println("Nombre de la provincia: " + provincia.getNombre());%>
-                            <option value=<%=provincia.getNombre()%>><%=provincia.getNombre()%></option>
+                            <option value="<%=provincia.getNombre()%>"><%=provincia.getNombre()%></option>
                         <%}%>
                 </select>
 
                 <!-- Mensaje de confirmacion de registro-->
                 <%
                     if(confirmacion != null){
-                    out.println("<small class='alert alert-success d-block w-50'>" + confirmacion + "</small>");
+                    out.println("<small class='alert alert-success d-block w-75'>" + confirmacion + "</small>");
                     }
                 %>
 
@@ -68,6 +73,51 @@ String confirmacion = (String)request.getAttribute("confirmacion");
 
             <input type="hidden" name="secreto" value="12345">
         </form>
+        <div class="vr"></div>
+        <table class="table w-50 me-4 ms-4">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Provincia</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                List<Localidad> localidades = new ArrayList<>();
+                DAOLocalidad daoLocalidad = new DAOLocalidadImpl();
+                localidades = daoLocalidad.listar();
+                ArrayList<Integer> localidadesDeCordoba = new ArrayList<>();
+                ArrayList<Integer> localidadesDeSantaFe = new ArrayList<>();
+                    localidadesDeCordoba.add(9);
+                    localidadesDeCordoba.add(10);
+                    localidadesDeCordoba.add(11);
+                    localidadesDeCordoba.add(12);
+                    localidadesDeCordoba.add(13);
+                    localidadesDeSantaFe.add(9);
+                        Integer count = 0;
+                    for(Localidad localidad: localidades) {
+                        for(Provincia provincia: provincias) {
+                            if(count == 0) {
+                                provincia.setLocalidades(localidadesDeCordoba);
+                                count++;
+                            }else{
+                                provincia.setLocalidades(localidadesDeSantaFe);
+                                count = 0;
+                            }
+
+                            if(provincia.getLocalidades().contains(localidad.getId())) {
+                                System.out.println("Para la localidad de " + localidad.getNombre() + "tenemos la provincia de " + provincia.getNombre());%>
+                                <tr>
+                                    <th scope="row"><%=localidad.getId()%></th>
+                                    <td><%=localidad.getNombre()%></td>
+                                    <td><%=provincia.getNombre()%></td>
+                                </tr>
+                            <%}
+                        }
+                    }%>
+            </tbody>
+        </table>
     </div>
     </body>
 </html>

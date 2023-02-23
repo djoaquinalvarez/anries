@@ -1,3 +1,4 @@
+org\joaquinalvarez\anries\forms\Prueba.class
 org\joaquinalvarez\anries\model\Articulo.class
 org\joaquinalvarez\anries\interfaces\DAOProvincia.class
 org\joaquinalvarez\anries\servlet\ServletRegistroLocalidad.class

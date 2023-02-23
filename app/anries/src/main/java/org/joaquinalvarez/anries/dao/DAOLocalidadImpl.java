@@ -82,7 +82,8 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Localidad localidad = new Localidad();
-                localidad.setNombre(rs.getString("nombreLocalidad"));
+                localidad.setId(rs.getInt("localidad_id"));
+                localidad.setNombre(rs.getString("nombre"));
                 localidades.add(localidad);
             }
             stmt.executeUpdate();
