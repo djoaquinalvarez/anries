@@ -37,6 +37,28 @@ String confirmacion = (String)request.getAttribute("confirmacion");
          });
     </script>
 
+    <!-- MODAL POPUP PARA CONFIRMACION DE ELIMINACION DE LOCALIDAD-->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar eliminación de localidad</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal_body-localidad">
+                    ¿Está seguro de borrar esta localidad?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger">Borrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CUERPO DEL ARCHIVO HTML-->
     <div id="navbar-template"></div>
     <h3 class="mt-5 ms-5 mb-4">Formulario de Localidades</h3>
@@ -73,7 +95,7 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                     }
                 %>
 
-                <input type="submit" id="send-button" value="Enviar" class="btn btn-outline-primary mt-2">
+                <input type="submit" id="send-button" value="Enviar" class="btn btn-primary mt-2">
             </div>
 
 
@@ -102,7 +124,10 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                                     <td class="dato_formulario"><%=localidad.getNombre()%></td>
                                     <td class="dato_formulario"><%=provincia.getNombre()%></td>
                                     <td>
-                                        <button type="button" id="button_<%=localidad.getId()%>" class="btn btn-outline-success btn-sm button">Editar</button>
+                                        <button type="button" id="button_editar-<%=localidad.getId()%>" class="btn btn-outline-success btn-sm button-editar">Editar</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" id="button_borrar-<%=localidad.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
                                     </td>
                                 </tr>
                             <%}
