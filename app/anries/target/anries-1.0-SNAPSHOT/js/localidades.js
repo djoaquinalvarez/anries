@@ -16,7 +16,7 @@ function editarLocalidad(evento) {
     //de la tabla, seleccionamos solo aquellos datos que vamos a cargar en los campos
     var datosDeTabla = fila.querySelectorAll(".dato_formulario");
     //obtenemos del formulario los campos que hay que rellenar
-    var camposARellenar = document.querySelectorAll(".campo-formulario");
+    var camposARellenar = document.querySelectorAll(".dato-tabla");
     //obtenemos el boton submit para cambiarle el texto de "Enviar" a "Actualizar"
     var buttonSubmit = document.querySelector("#send-button")
     buttonSubmit.value = "Actualizar";

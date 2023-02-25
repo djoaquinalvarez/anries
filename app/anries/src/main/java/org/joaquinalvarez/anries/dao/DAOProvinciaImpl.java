@@ -77,7 +77,6 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
                 provincia.setId(rs.getInt("provincia_id"));
                 provincia.setNombre(rs.getString("nombre"));
                 provincia.setLocalidades(buscarLocalidadesDeProvincia(provincia.getId()));
-                System.out.println("REGISTRAMOS EL ID EN LA PROVINCIA: " + provincia.getLocalidades());
                 provincias.add(provincia);
             }
             conexion.commit();
@@ -108,9 +107,7 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
     public ArrayList<Integer> buscarLocalidadesDeProvincia(Integer idProvincia) throws Exception {
         ArrayList<Integer> localidades = new ArrayList<>();
         this.conectar();
-        System.out.println("LLEGAMOS AL BUSCAR LOCALIDADES");
         PreparedStatement stmt = this.conexion.prepareStatement("SELECT localidad_id FROM Localidad JOIN Provincia ON (Localidad.provincia_id = ?)");
-        System.out.println("PASAMOS AL BUSCAR LOCALIDADES");
         stmt.setInt(1, idProvincia);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()) {

@@ -43,25 +43,25 @@ String confirmacion = (String)request.getAttribute("confirmacion");
 
     <div class="d-flex flex-row ms-5 me-5">
         <form action="/anries/form_registro-localidad" id="formulario-localidades" method="post" class="w-50 d-inline-block">
+            <input type="hidden" class="dato-tabla" name="id" value="">
             <div class="mb-4 ms-4">
-                <label for="nombreLocalidad" class="form-label">Nombre</label>
-                <input type="text" name="nombreLocalidad" id="nombreLocalidad" class="form-control w-75 mb-3 campo-formulario" placeholder="Inserte un nombre..." value="${param.nombreLocalidad}">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte un nombre..." value="${param.nombre}">
                 <%
-                if(errores != null && errores.containsKey("nombreLocalidad")) {
-                    out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombreLocalidad") + "</small>");
+                if(errores != null && errores.containsKey("nombre")) {
+                    out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombre") + "</small>");
                 }
                 %>
 
 
                 <label for="provincia" class="form-label">Provincia</label>
-                <select id="provincia" name="provincia" class="form-select w-75 mb-3 campo-formulario" aria-label="Default select example">
+                <select id="provincia" name="provincia" class="form-select w-75 mb-3 dato-tabla" aria-label="Default select example">
                     <option selected>Seleccione una provincia</option>
                     <%
                         List<Provincia> provincias = new ArrayList<>();
                         DAOProvincia daoProvincia = new DAOProvinciaImpl();
                         provincias = daoProvincia.listar();
                         for(Provincia provincia: provincias) { %>
-                            <%System.out.println("Nombre de la provincia: " + provincia.getNombre());%>
                             <option value="<%=provincia.getNombre()%>"><%=provincia.getNombre()%></option>
                         <%}%>
                 </select>
@@ -76,7 +76,7 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 <input type="submit" id="send-button" value="Enviar" class="btn btn-outline-primary mt-2">
             </div>
 
-            <input type="hidden" name="secreto" value="12345">
+
         </form>
         <div class="vr"></div>
         <table id="tabla-localidades" class="table w-50 me-4 ms-4">
@@ -95,12 +95,10 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 localidades = daoLocalidad.listar();
                     for(Localidad localidad: localidades) {
                         for(Provincia provincia: provincias) {
-                            System.out.println("Listado de localidades: " + provincia.getLocalidades());
                             if(provincia.getLocalidades().contains(localidad.getId())) {
-                                System.out.println("ID Localidad: " + localidad.getId() + "|| ID Localidad en Provincia: " + provincia.getId());
                                 %>
                                 <tr id="localidad_<%=localidad.getId()%>">
-                                    <th scope="row"><%=localidad.getId()%></th>
+                                    <th class="dato_formulario" scope="row"><%=localidad.getId()%></th>
                                     <td class="dato_formulario"><%=localidad.getNombre()%></td>
                                     <td class="dato_formulario"><%=provincia.getNombre()%></td>
                                     <td>

@@ -58,4 +58,8 @@ public class Localidad {
 
     }
 
+    public static void modificarLocalidad(Integer id, String nombre, String provincia) {
+
+    }
+
 }

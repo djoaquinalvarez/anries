@@ -37,13 +37,11 @@ public class ServletRegistroLocalidad extends HttpServlet {
         if(errores.isEmpty()) {
             try {
                 registrarLocalidad(nombre, provincia);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            try(PrintWriter out = resp.getWriter()) {
                 mensajeConfirmacionRegistro =  "La localidad '" + nombre  + "' de la provincia de '" + provincia + "' ha sido registrada correctamente.";
                 req.setAttribute("confirmacion", mensajeConfirmacionRegistro);
                 getServletContext().getRequestDispatcher("/form_localidades.jsp").forward(req, resp);//pasamos el request y el response a la jsp
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         } else {
             req.setAttribute("errores", errores);
