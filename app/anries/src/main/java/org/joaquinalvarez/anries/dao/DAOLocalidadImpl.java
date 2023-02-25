@@ -38,13 +38,14 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     }
 
     @Override
-    public void modificar(Localidad localidad) throws Exception {
+    public void modificar(Localidad localidad, Integer idProvincia) throws Exception {
         try{
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("UPDATE anries.dbo.localidad SET nombreLocalidad = ? WHERE nombreLocalidad = ?");
+            PreparedStatement stmt = this.conexion.prepareStatement("UPDATE anries.dbo.localidad SET nombre = ?, provincia_id = ? WHERE localidad_id = ?");
             conexion.setAutoCommit(false);
             stmt.setString(1, localidad.getNombre());
-            stmt.setInt(2, localidad.getId());
+            stmt.setInt(2, idProvincia);
+            stmt.setInt(3, localidad.getId());
             stmt.executeUpdate();
             conexion.commit();
         }catch(Exception e) {
