@@ -19,8 +19,8 @@ public class ServletModificarLocalidad extends HttpServlet {
         resp.setContentType("text/html");
 
         String idString = req.getParameter("id");
-        String nombre = req.getParameter("nombre");
-        String provincia = req.getParameter("provincia");
+        String nombreLocalidad = req.getParameter("nombre");
+        String nombreProvincia = req.getParameter("provincia");
 
         Map<String, String> errores = new HashMap<>();
         String mensajeConfirmacionRegistro;
@@ -28,28 +28,28 @@ public class ServletModificarLocalidad extends HttpServlet {
         //System.out.println("El id de la localidad " + nombre + " es: " + idString);
         Integer idNumerico = Integer.valueOf(idString);
 
-        if(nombre == null || nombre.equals("")) {
+        if(nombreLocalidad == null || nombreLocalidad.equals("")) {
             errores.put("nombre", "El nombre de la localidad es requerido.");
-        } else if(provincia == null || provincia.equals("")) {
+        } else if(nombreProvincia == null || nombreProvincia.equals("")) {
             errores.put("provincia", "La provincia es requerida.");
         }
 
         if (errores.isEmpty()) {
             try{
-                modificarLocalidad(idNumerico, nombre, provincia);
-                mensajeConfirmacionRegistro = "Se ha modificado el registro de localidad de la siguiente manera: " +  nombre + ", " + provincia;
+                modificarLocalidad(idNumerico, nombreLocalidad, nombreProvincia);
+                mensajeConfirmacionRegistro = "Se ha modificado el registro de localidad de la siguiente manera: " +  nombreLocalidad + ", " + nombreProvincia;
                 req.setAttribute("confirmacion", mensajeConfirmacionRegistro);
-                getServletContext().getRequestDispatcher("./form_localidades.jsp").forward(req, resp);
-            }catch(RuntimeException e) {
+                getServletContext().getRequestDispatcher("/form_localidades.jsp").forward(req, resp);
+            }catch(Exception e) {
                 e.printStackTrace();
             }
         }else {
             req.setAttribute("errores", errores);
-            getServletContext().getRequestDispatcher("./form_localidades.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/form_localidades.jsp").forward(req, resp);
         }
     }
 
-    public void modificarLocalidad(Integer id, String nombre, String provincia) {
-        Localidad.modificarLocalidad(id, nombre, provincia);
+    public void modificarLocalidad(Integer id, String nombreLocalidad, String nombreProvincia) throws Exception {
+        Localidad.modificarLocalidad(id, nombreLocalidad, nombreProvincia);
     }
 }

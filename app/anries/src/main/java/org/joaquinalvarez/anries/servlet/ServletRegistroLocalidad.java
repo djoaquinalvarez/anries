@@ -19,7 +19,7 @@ public class ServletRegistroLocalidad extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
 
-        String nombre = req.getParameter("nombreLocalidad");
+        String nombre = req.getParameter("nombre");
         String provincia = req.getParameter("provincia");
 
         Map<String, String> errores = new HashMap<>();
