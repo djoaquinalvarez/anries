@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
 
-
     @Override
     public void registrar(Localidad localidad, Integer idProvincia) throws Exception {
         try{
@@ -58,11 +57,11 @@ public class DAOLocalidadImpl extends Conexion implements DAOLocalidad {
     }
 
     @Override
-    public void eliminar(Localidad localidad) throws Exception {
+    public void eliminar(Integer idLocalidad) throws Exception {
         try{
             this.conectar();
             PreparedStatement stmt = this.conexion.prepareStatement("DELETE from anries.dbo.localidad WHERE localidad_id = ?");
-            stmt.setInt(1, localidad.getId());
+            stmt.setInt(1, idLocalidad);
             stmt.executeUpdate();
         }catch(Exception e) {
             throw e;

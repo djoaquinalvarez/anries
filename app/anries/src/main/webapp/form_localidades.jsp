@@ -41,11 +41,12 @@ String confirmacion = (String)request.getAttribute("confirmacion");
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="/anries/form_eliminar-localidad" method="post" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar eliminación de localidad</h1>
+                    <input type="hidden" class="dato-servlet" name="id" value="">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal_body-localidad">
@@ -53,11 +54,11 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger">Borrar</button>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- CUERPO DEL ARCHIVO HTML-->
     <div id="navbar-template"></div>

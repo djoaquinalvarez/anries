@@ -79,4 +79,9 @@ public class Localidad {
         });
     }
 
+    public static void eliminarLocalidad(Integer idLocalidad) throws Exception {
+        DAOLocalidad daoLocalidad = new DAOLocalidadImpl();
+        daoLocalidad.eliminar(idLocalidad);
+    }
+
 }

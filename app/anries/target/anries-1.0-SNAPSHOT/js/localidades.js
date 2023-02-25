@@ -49,19 +49,22 @@ $(document).ready(function cargarEventosClicEditar() {
 });
 
 function borrarLocalidad(evento) {
-    console.log("Evento cargado correctamente para el boton " + evento.target.id);
     var modal = document.querySelector("#exampleModal");
     var modalBody = modal.querySelector("#modal_body-localidad");
+    var inputId = modal.querySelector(".dato-servlet");
 
     //Buscamos el nombre de la localidad seleccionada
     var fila = document.querySelector("#localidad_" + evento.target.id.substring(14,)); //seleccionamos cada una de las filas de la tabla
 
     var datosTabla = fila.querySelectorAll(".dato_formulario"); //separamos la fila en campos individuales
 
-    modalBody.textContent = "¿Está seguro de eliminar la localidad de " + datosTabla[1].textContent + "?";
-
-
-
     //Modificamos el titulo del modal segun el nombre de la localidad seleccionada
+    modalBody.textContent = "¿Está seguro de eliminar la localidad de " + datosTabla[1].textContent + "?";
+    inputId.value = datosTabla[0].textContent;
+    //Cargamos la funcionalidad del boton borrar definitivo
+
+
+
+
 }
 
