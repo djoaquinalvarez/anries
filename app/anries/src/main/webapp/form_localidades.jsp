@@ -97,6 +97,7 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                 %>
 
                 <input type="submit" id="send-button" value="Enviar" class="btn btn-primary mt-2">
+                <input type="button" id="hidden-button_cancelar" value="Cancelar" class="btn btn-secondary mt-2 visually-hidden">
             </div>
 
 

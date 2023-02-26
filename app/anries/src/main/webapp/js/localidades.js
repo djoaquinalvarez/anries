@@ -17,11 +17,20 @@ function editarLocalidad(evento) {
 
     //de la tabla, seleccionamos solo aquellos datos que vamos a cargar en los campos
     var datosDeTabla = fila.querySelectorAll(".dato_formulario");
+
     //obtenemos del formulario los campos que hay que rellenar
     var camposARellenar = document.querySelectorAll(".dato-tabla");
+
     //obtenemos el boton submit para cambiarle el texto de "Enviar" a "Actualizar"
     var buttonSubmit = document.querySelector("#send-button")
     buttonSubmit.value = "Actualizar";
+
+
+    //mostramos el boton de cancelar edicion;
+    var buttonHidden = document.querySelector("#hidden-button_cancelar");
+    console.log(buttonHidden);
+    buttonHidden.classList.remove("visually-hidden");
+
     //cambiamos el action del formulario del modo "Registrar" a "Modificar"
     var form = document.querySelector("#formulario-localidades");
     form.action = "/anries/form_modificar-localidad";
@@ -61,10 +70,25 @@ function borrarLocalidad(evento) {
     //Modificamos el titulo del modal segun el nombre de la localidad seleccionada
     modalBody.textContent = "¿Está seguro de eliminar la localidad de " + datosTabla[1].textContent + "?";
     inputId.value = datosTabla[0].textContent;
-    //Cargamos la funcionalidad del boton borrar definitivo
+}
 
+$(document).ready(function cargarEventoBotonCancelarEdicion() {
+    var buttonHidden = document.querySelector("#hidden-button_cancelar");
+    //console.log(botones);
+    buttonHidden.addEventListener("click", cancelarEdicion);
+});
 
+function cancelarEdicion() {
+    //Ocultamos el boton de cancelar edicion
+    var buttonHidden = document.querySelector("#hidden-button_cancelar");
+    buttonHidden.classList.add("visually-hidden");
 
+    //obtenemos el boton submit para cambiarle el texto de "Actualizar" a "Enviar"
+    var buttonSubmit = document.querySelector("#send-button")
+    buttonSubmit.value = "Enviar";
+
+    //vaciamos los campos del formulario]
+    document.querySelector("#formulario-localidades").reset();
 
 }
 
