@@ -50,7 +50,7 @@ public class Provincia {
         DAOProvincia daoProvincia = new DAOProvinciaImpl();
         daoProvincia.registrar(provincia);
         //buscamos el id del elemento registrado y lo guardamos en el objeto
-        provincia.setId(daoProvincia.buscarProvinciaPorNombre(provincia.getNombre()).getId());
+        //provincia.setId(daoProvincia.buscarProvinciaPorNombre(provincia.getNombre()).getId());
     }
 
     public static void modificar(Integer idProvincia, String nombreProvincia) throws Exception {

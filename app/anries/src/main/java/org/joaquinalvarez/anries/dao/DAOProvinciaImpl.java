@@ -17,11 +17,13 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
     public void registrar(Provincia provincia) throws Exception {
         try {
             this.conectar();
-            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO provincia(nombre) VALUES (?)");
             conexion.setAutoCommit(false);
+            PreparedStatement stmt = this.conexion.prepareStatement("INSERT INTO provincia(nombre) VALUES (?)");
+            System.out.println("llegue hasta PREPARAR la consulta");
             stmt.setString(1, provincia.getNombre());
             stmt.executeUpdate();
             conexion.commit();
+            System.out.println("llegue hasta EJECUTAR la consulta");
         } catch(SQLException e) {
             e.printStackTrace();
             conexion.rollback();

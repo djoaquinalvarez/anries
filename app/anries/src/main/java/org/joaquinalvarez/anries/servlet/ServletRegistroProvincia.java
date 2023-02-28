@@ -29,6 +29,7 @@ public class ServletRegistroProvincia extends HttpServlet {
             try {
                 registrarProvincia(nombre);
                 mensajeConfirmacionRegistro = "La provincia '" + nombre + "' ha sido registrada correctamente.";
+                System.out.println(mensajeConfirmacionRegistro);
                 req.setAttribute("confirmacion", mensajeConfirmacionRegistro);
                 getServletContext().getRequestDispatcher("/form_provincia.jsp").forward(req, resp);
             }catch(Exception e) {
