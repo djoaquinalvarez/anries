@@ -28,7 +28,6 @@ function editarLocalidad(evento) {
 
     //mostramos el boton de cancelar edicion;
     var buttonHidden = document.querySelector("#hidden-button_cancelar");
-    console.log(buttonHidden);
     buttonHidden.classList.remove("visually-hidden");
 
     //cambiamos el action del formulario del modo "Registrar" a "Modificar"
@@ -46,7 +45,7 @@ function editarLocalidad(evento) {
 }
 
 //----------CARGAMOS EVENTOS CLICK PARA BOTONES BORRAR LOCALIDAD---------------
-$(document).ready(function cargarEventosClicEditar() {
+$(document).ready(function cargarEventosClicBorrar() {
     var table = document.querySelector("#tabla-localidades");
     var botones = table.querySelectorAll(".button-borrar");
     //console.log(botones);
