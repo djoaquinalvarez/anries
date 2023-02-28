@@ -89,6 +89,6 @@ function cancelarEdicion() {
 
     //vaciamos los campos del formulario]
     document.querySelector("#formulario-localidades").reset();
-    
+
 }
 

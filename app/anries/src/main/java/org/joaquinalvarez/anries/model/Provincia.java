@@ -51,4 +51,12 @@ public class Provincia {
         //buscamos el id del elemento registrado y lo guardamos en el objeto
         provincia.setId(daoProvincia.buscarProvinciaPorNombre(provincia.getNombre()).getId());
     }
+
+    public static void eliminar(Integer idProvincia) throws Exception {
+        Provincia provincia = new Provincia();
+        provincia.setId(idProvincia);
+
+        DAOProvincia daoProvincia = new DAOProvinciaImpl();
+        daoProvincia.eliminar(provincia);
+    }
 }

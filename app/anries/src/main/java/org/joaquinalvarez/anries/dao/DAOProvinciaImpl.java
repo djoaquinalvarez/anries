@@ -57,7 +57,7 @@ public class DAOProvinciaImpl extends Conexion implements DAOProvincia {
             stmt.setInt(1, provincia.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.getNextException();
+            e.printStackTrace();
         }finally {
             this.cerrar();
         }
