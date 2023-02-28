@@ -1,4 +1,8 @@
 org\joaquinalvarez\anries\servlet\ServletModificarLocalidad.class
+<<<<<<< HEAD
+=======
+org\joaquinalvarez\anries\servlet\ServletEliminarProvincia.class
+>>>>>>> dev_eliminar-provincia
 org\joaquinalvarez\anries\servlet\ServletRegistroLocalidad.class
 org\joaquinalvarez\anries\dao\Conexion.class
 org\joaquinalvarez\anries\model\DetalleVenta.class
@@ -9,7 +13,10 @@ org\joaquinalvarez\anries\servlet\ServletRegistroProvincia.class
 org\joaquinalvarez\anries\model\Localidad.class
 org\joaquinalvarez\anries\model\Proveedor.class
 org\joaquinalvarez\anries\model\Compra.class
+<<<<<<< HEAD
 org\joaquinalvarez\anries\servlet\ServletModificarProvincia.class
+=======
+>>>>>>> dev_eliminar-provincia
 org\joaquinalvarez\anries\model\DetalleCompra.class
 org\joaquinalvarez\anries\forms\Prueba.class
 org\joaquinalvarez\anries\model\Articulo.class

@@ -61,4 +61,12 @@ public class Provincia {
         DAOProvincia daoProvincia = new DAOProvinciaImpl();
         daoProvincia.modificar(provincia);
     }
+
+    public static void eliminar(Integer idProvincia) throws Exception {
+        Provincia provincia = new Provincia();
+        provincia.setId(idProvincia);
+
+        DAOProvincia daoProvincia = new DAOProvinciaImpl();
+        daoProvincia.eliminar(provincia);
+    }
 }
