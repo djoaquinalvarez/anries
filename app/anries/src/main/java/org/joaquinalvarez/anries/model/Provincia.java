@@ -1,5 +1,6 @@
 package org.joaquinalvarez.anries.model;
 
+import jakarta.validation.constraints.PastOrPresent;
 import org.joaquinalvarez.anries.dao.DAOProvinciaImpl;
 import org.joaquinalvarez.anries.interfaces.DAOProvincia;
 
@@ -50,5 +51,14 @@ public class Provincia {
         daoProvincia.registrar(provincia);
         //buscamos el id del elemento registrado y lo guardamos en el objeto
         provincia.setId(daoProvincia.buscarProvinciaPorNombre(provincia.getNombre()).getId());
+    }
+
+    public static void modificar(Integer idProvincia, String nombreProvincia) throws Exception {
+        Provincia provincia = new Provincia();
+        provincia.setId(idProvincia);
+        provincia.setNombre(nombreProvincia);
+
+        DAOProvincia daoProvincia = new DAOProvinciaImpl();
+        daoProvincia.modificar(provincia);
     }
 }
