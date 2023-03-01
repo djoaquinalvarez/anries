@@ -125,11 +125,9 @@ String confirmacion = (String)request.getAttribute("confirmacion");
                                     <th class="dato_formulario" scope="row"><%=localidad.getId()%></th>
                                     <td class="dato_formulario"><%=localidad.getNombre()%></td>
                                     <td class="dato_formulario"><%=provincia.getNombre()%></td>
-                                    <td>
-                                        <button type="button" id="button_editar-<%=localidad.getId()%>" class="btn btn-outline-success btn-sm button-editar">Editar</button>
-                                    </td>
-                                    <td>
+                                    <td class="d-flex flex-row-reverse flex-shrink-1">
                                         <button type="button" id="button_borrar-<%=localidad.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
+                                        <button type="button" id="button_editar-<%=localidad.getId()%>" class="btn btn-outline-success btn-sm button-editar me-2">Editar</button>
                                     </td>
                                 </tr>
                             <%}
