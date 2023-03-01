@@ -30,7 +30,7 @@ String confirmacion = (String)request.getAttribute("confirmacion");
     <script src="./js/provincias.js"></script>
 
     <!-- Modal -->
-    <form action="/anries/form_eliminar-localidad" method="post" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="/anries/form_eliminar-provincia" method="post" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

@@ -57,7 +57,6 @@ $(document).ready(function cargarEventosClicBorrar() {
 });
 
 function borrarProvincia(evento) {
-    console.log("hol;is");
     var modal = document.querySelector("#exampleModal");
     var modalBody = modal.querySelector("#modal_body-provincia");
     var inputId = modal.querySelector(".dato-servlet");
