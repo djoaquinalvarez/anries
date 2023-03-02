@@ -1,13 +1,13 @@
 package org.joaquinalvarez.anries.model;
 
-import java.util.Date;
+import java.time.*;
 
 public class Empleado extends Persona{
     private Integer legajo;
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
     private Rol rol;
 
-    public Empleado(String nombre, String apellido, String direccion, Integer dni, Date fechaNacimiento, Integer numeroTelefono, Integer legajo, Date fechaIngreso, Rol rol) {
+    public Empleado(String nombre, String apellido, String direccion, Integer dni, LocalDate fechaNacimiento, Integer numeroTelefono, Integer legajo, LocalDate fechaIngreso, Rol rol) {
         super(nombre, apellido, direccion, dni, fechaNacimiento, numeroTelefono);
         this.legajo = legajo;
         this.fechaIngreso = fechaIngreso;
@@ -26,11 +26,11 @@ public class Empleado extends Persona{
         this.legajo = legajo;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

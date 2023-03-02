@@ -1,20 +1,20 @@
 package org.joaquinalvarez.anries.model;
 
-import java.util.Date;
+import java.time.*;
 
 public class Persona {
     private String nombre;
     private String apellido;
     private String direccion;
     private Integer dni;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private Integer numeroTelefono;
 
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String direccion, Integer dni, Date fechaNacimiento, Integer numeroTelefono) {
+    public Persona(String nombre, String apellido, String direccion, Integer dni, LocalDate fechaNacimiento, Integer numeroTelefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -55,11 +55,11 @@ public class Persona {
         this.dni = dni;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
