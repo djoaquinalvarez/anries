@@ -41,4 +41,8 @@ public class Empleado extends Persona{
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public static void registrar() {
+
+    }
 }
