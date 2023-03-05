@@ -39,60 +39,59 @@
 
     <div class="d-flex flex-row ms-5 me-5">
         <form action="/anries/form_registro-empleado" id="formulario-empleados" method="post" class="w-50 d-inline-block">
-            <input type="hidden" class="dato-tabla" name="id" value="">
+            <input type="hidden" class="dato-formulario" name="id" value="">
             <div class="mb-4 ms-4">
                 <label for="nombre" class="form-label"><b>Nombre</b></label>
-                <input type="text" name="nombre" id="nombre" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte el nombre del empleado" value="${param.nombre}">
+                <input type="text" name="nombre" id="nombre" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte el nombre del empleado" value="${param.nombre}">
                 <%
                     if(errores != null && errores.containsKey("nombre")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("nombre") + "</small>");
                 }%>
 
                 <label for="apellido" class="form-label"><b>Apellido</b></label>
-                <input type="text" name="apellido" id="apellido" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte el apellido del empleado" value="${param.apellido}">
+                <input type="text" name="apellido" id="apellido" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte el apellido del empleado" value="${param.apellido}">
                 <%
                     if(errores != null && errores.containsKey("apellido")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("apellido") + "</small>");
                 }%>
 
                 <label for="direccion" class="form-label"><b>Direccion</b></label>
-                <input type="text" name="direccion" id="direccion" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte una direccion" value="${param.direccion}">
+                <input type="text" name="direccion" id="direccion" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte una direccion" value="${param.direccion}">
                 <%
                     if(errores != null && errores.containsKey("direccion")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("direccion") + "</small>");
                 }%>
 
                 <label for="dni" class="form-label"><b>Numero de DNI</b></label>
-                <input type="tel" name="dni" id="dni" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte el DNI del empleado" value="${param.dni}">
+                <input type="tel" name="dni" id="dni" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte el DNI del empleado" value="${param.dni}">
                 <%
                     if(errores != null && errores.containsKey("dni")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("dni") + "</small>");
                 }%>
 
+                <label for="numeroTelefono" class="form-label"><b>Numero de telefono</b></label>
+                <input type="tel" name="numeroTelefono" id="numeroTelefono" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte un numero de telefono" value="${param.numeroTelefono}">
+                <%
+                if(errores != null && errores.containsKey("numeroTelefono")) {
+                out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("numeroTelefono") + "</small>");
+                }%>
+
+                <label for="fechaIngreso" class="form-label"><b>Fecha de ingreso</b></label>
+                <input type="date" name="fechaIngreso" id="fechaIngreso" class="form-control w-75 mb-3 dato-formulario" placeholder="" value="${param.fechaIngreso}">
+                <%
+                if(errores != null && errores.containsKey("fechaIngreso")) {
+                out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("fechaIngreso") + "</small>");
+                }%>
+
                 <label for="fechaNacimiento" class="form-label"><b>Fecha de nacimiento</b></label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte la fecha de nacimiento del empleado" value="${param.fechaNacimiento}">
+                <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte la fecha de nacimiento del empleado" value="${param.fechaNacimiento}">
                 <%
                     if(errores != null && errores.containsKey("fechaNacimiento")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("fechaNacimiento") + "</small>");
                 }%>
 
-                <label for="numeroTelefono" class="form-label"><b>Numero de telefono</b></label>
-                <input type="tel" name="numeroTelefono" id="numeroTelefono" class="form-control w-75 mb-3 dato-tabla" placeholder="Inserte un numero de telefono" value="${param.numeroTelefono}">
-                <%
-                    if(errores != null && errores.containsKey("numeroTelefono")) {
-                    out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("numeroTelefono") + "</small>");
-                }%>
-
-                <label for="fechaIngreso" class="form-label"><b>Fecha de ingreso</b></label>
-                <input type="date" name="fechaIngreso" id="fechaIngreso" class="form-control w-75 mb-3 dato-tabla" placeholder="" value="${param.fechaIngreso}">
-                <%
-                    if(errores != null && errores.containsKey("fechaIngreso")) {
-                    out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("fechaIngreso") + "</small>");
-                }%>
-
-
                 <label for="rol" class="form-label"><b>Rol</b></label>
-                <select id="rol" name="rol" class="form-select w-75 mb-3 dato-tabla" aria-label="Default select example">
+                <select id="rol" name="rol" class="form-select w-75 mb-3 dato-formulario" aria-label="Default select example">
                     <option selected>Seleccione el rol del empleado</option>
                     <%
                     List<Rol> roles = new ArrayList<>();
@@ -116,7 +115,7 @@
         </form>
 
         <div class="vr"></div>
-        <table id="tabla-localidades" class="table w-50 me-4 ms-4">
+        <table id="tabla-empleados" class="table w-50 me-4 ms-4">
             <thead>
             <tr>
                 <th scope="col">id</th>
@@ -140,16 +139,16 @@
                 for(Rol rol: roles) {
                 if(rol.getId().equals(empleado.getRol())) {
                 %>
-                <tr id="localidad_<%=empleado.getId()%>">
-                    <th class="dato_formulario" scope="row"><%=empleado.getId()%></th>
-                    <td class="dato_formulario"><%=empleado.getNombre()%></td>
-                    <td class="dato_formulario"><%=empleado.getApellido()%></td>
-                    <td class="dato_formulario"><%=empleado.getDireccion()%></td>
-                    <td class="dato_formulario"><%=empleado.getDni()%></td>
-                    <td class="dato_formulario"><%=empleado.getNumeroTelefono()%></td>
-                    <td class="dato_formulario"><%=empleado.getFechaIngreso()%></td>
-                    <td class="dato_formulario"><%=empleado.getFechaNacimiento()%></td>
-                    <td class="dato_formulario"><%=rol.getNombre()%></td>
+                <tr id="empleado_<%=empleado.getId()%>">
+                    <th class="dato-tabla" scope="row"><%=empleado.getId()%></th>
+                    <td class="dato-tabla"><%=empleado.getNombre()%></td>
+                    <td class="dato-tabla"><%=empleado.getApellido()%></td>
+                    <td class="dato-tabla"><%=empleado.getDireccion()%></td>
+                    <td class="dato-tabla"><%=empleado.getDni()%></td>
+                    <td class="dato-tabla"><%=empleado.getNumeroTelefono()%></td>
+                    <td class="dato-tabla"><%=empleado.getFechaIngreso()%></td>
+                    <td class="dato-tabla"><%=empleado.getFechaNacimiento()%></td>
+                    <td class="dato-tabla"><%=rol.getNombre()%></td>
                     <td class="d-flex flex-row-reverse flex-shrink-1">
                         <button type="button" id="button_borrar-<%=empleado.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
                         <button type="button" id="button_editar-<%=empleado.getId()%>" class="btn btn-outline-success btn-sm button-editar me-2">Editar</button>

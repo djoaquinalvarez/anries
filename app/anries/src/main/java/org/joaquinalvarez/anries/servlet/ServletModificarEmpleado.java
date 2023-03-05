@@ -1,14 +1,17 @@
 package org.joaquinalvarez.anries.servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.joaquinalvarez.anries.model.Empleado;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@WebServlet("/form_modificar-empleado")
 public class ServletModificarEmpleado extends HttpServlet {
 
     @Override
@@ -61,7 +64,7 @@ public class ServletModificarEmpleado extends HttpServlet {
         }
     }
 
-    public void modificar(Integer idEmpleado, String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String rol){
-        Empleado.modificar();
+    public void modificar(Integer idEmpleado, String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String rol) throws Exception {
+        Empleado.modificar(idEmpleado, nombreEmpleado, apellidoEmpleado, direccion, dni, fechaNacimiento, numeroTelefono, fechaIngreso, rol);
     }
 }
