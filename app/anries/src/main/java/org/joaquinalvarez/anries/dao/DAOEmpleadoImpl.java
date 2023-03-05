@@ -40,6 +40,35 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
 
     @Override
     public void modificar(Empleado empleado) throws Exception {
+        this.conectar();
+        this.conexion.setAutoCommit(false);
+        PreparedStatement stmtEmpleado = this.conexion.prepareStatement("UPDATE Empleado SET " +
+                "fechaIngreso = ?," +
+                "rol_id = ? " +
+                "WHERE empleado_id = ?");
+        stmtEmpleado.setDate(1, java.sql.Date.valueOf(empleado.getFechaIngreso()));
+        stmtEmpleado.setInt(2, empleado.getRol());
+        stmtEmpleado.setInt(3, empleado.getId());
+        stmtEmpleado.executeUpdate();
+        this.conexion.commit();
+
+        PreparedStatement stmtPersona = this.conexion.prepareStatement("UPDATE Persona SET nombre = ?,"+
+                "apellido = ?," +
+                "direccion = ?," +
+                "dni = ?," +
+                "numeroTelefono = ?," +
+                "fechaNacimiento = ? " +
+                "WHERE Persona.persona_id = (SELECT persona_id FROM Empleado WHERE empleado_id = ?)");
+        stmtPersona.setString(1, empleado.getNombre());
+        stmtPersona.setString(2, empleado.getApellido());
+        stmtPersona.setString(3, empleado.getDireccion());
+        stmtPersona.setInt(4, empleado.getDni());
+        stmtPersona.setInt(5, empleado.getNumeroTelefono());
+        stmtPersona.setDate(6, java.sql.Date.valueOf(empleado.getFechaNacimiento()));
+        stmtPersona.setInt(7, empleado.getId());
+        stmtPersona.executeUpdate();
+
+        this.conexion.commit();
 
     }
 
