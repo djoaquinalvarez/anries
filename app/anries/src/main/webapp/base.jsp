@@ -66,6 +66,20 @@
                         <li><a class="dropdown-item disabled" href="#">Visualizar provincias registradas</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Empleados
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="http://localhost:8080/anries/form_empleado.jsp">Registrar nuevo empleado</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Modificar empleado existente</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Eliminar empleado</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item disabled" href="#">Visualizar empleados registrados</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

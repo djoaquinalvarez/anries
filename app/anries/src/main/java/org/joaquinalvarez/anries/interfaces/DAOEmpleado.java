@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DAOEmpleado {
 
-    public void registrar(Empleado empleado, Integer idRol) throws Exception;
+    public void registrar(Empleado empleado) throws Exception;
     public void modificar(Empleado empleado) throws Exception;
     public void eliminar(Integer idEmpleado) throws Exception;
     public List<Empleado> listar() throws Exception;

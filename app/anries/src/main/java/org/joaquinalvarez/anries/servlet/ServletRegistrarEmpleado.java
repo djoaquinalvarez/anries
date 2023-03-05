@@ -8,10 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.joaquinalvarez.anries.model.Empleado;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/form_registrar-empleado")
+@WebServlet("/form_registro-empleado")
 public class ServletRegistrarEmpleado extends HttpServlet {
 
     @Override
@@ -23,6 +24,8 @@ public class ServletRegistrarEmpleado extends HttpServlet {
         String dni = req.getParameter("dni");
         String fechaNacimiento = req.getParameter("fechaNacimiento");
         String numeroTelefono = req.getParameter("numeroTelefono");
+        String fechaIngreso = req.getParameter("fechaIngreso");
+        String rol = req.getParameter("rol");
 
         Map<String, String> errores = new HashMap<>();
         String mensajeConfirmacion;
@@ -40,11 +43,16 @@ public class ServletRegistrarEmpleado extends HttpServlet {
             errores.put("fechaNacimiento", "La fecha de nacimiento del empleado es requerida.");
         } else if (numeroTelefono == null || numeroTelefono.equals("")) {
             errores.put("numeroTelefono", "Se requiere registrar un numero de telefono");
+        } else if (fechaIngreso == null || fechaIngreso.equals("")) {
+            errores.put("fechaIngreso", "La fecha de ingreso del empleado es requerida.");
+        } else if (rol == null || rol.equals("")) {
+            errores.put("rol", "El rol del empleado es requerido");
         }
 
         if (errores.isEmpty()) {
             try {
-                registrar(nombreEmpleado, apellidoEmpleado, direccion, Integer.valueOf(dni), fechaNacimiento, Integer.valueOf(numeroTelefono));
+                registrar(nombreEmpleado, apellidoEmpleado, direccion, Integer.valueOf(dni), fechaNacimiento, Integer.valueOf(numeroTelefono), fechaIngreso, rol);
+                System.out.println(fechaIngreso);
                 mensajeConfirmacion = "El empleado '" + apellidoEmpleado + ", " + nombreEmpleado + "' ha sido registrado correctamente.";
                 req.setAttribute("confirmacion", mensajeConfirmacion);
                 getServletContext().getRequestDispatcher("/form_empleado.jsp").forward(req, resp);
@@ -57,7 +65,7 @@ public class ServletRegistrarEmpleado extends HttpServlet {
         }
     }
 
-    public void registrar(String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono) {
-        Empleado.registrar();
+    public void registrar(String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String rol) throws Exception {
+        Empleado.registrar(nombreEmpleado, apellidoEmpleado, direccion, dni, fechaNacimiento, numeroTelefono, fechaIngreso, rol);
     }
 }

@@ -10,7 +10,7 @@ public class Conexion {
 
     protected Connection conexion;
     //JDBC Driver nombre y Base de datos
-    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=anries;user=sa;password=jey; Encrypt=True;TrustServerCertificate=True";
+    String connectionUrl = "jdbc:sqlserver://LAPTOP-UE7OBDFK\\SQLEXPRESS:1432;databaseName=anries;user=sa;password=jey; Encrypt=True;TrustServerCertificate=True";
 
 
     public void conectar() throws Exception{

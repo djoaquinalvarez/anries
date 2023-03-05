@@ -11,14 +11,14 @@ import java.time.*;
 public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
 
     @Override
-    public void registrar(Empleado empleado, Integer idRol) throws Exception {
+    public void registrar(Empleado empleado) throws Exception {
+        System.out.println("ANTES DEL CONECTAR");
         this.conectar();
+        System.out.println("DESPUES DEL CONECTAR");
         this.conexion.setAutoCommit(false);
         PreparedStatement stmtPersona = this.conexion
                 .prepareStatement("INSERT INTO Persona(nombre, apellido, direccion, " +
                         "dni, fechaNacimiento, numeroTelefono) VALUES (?,?,?,?,?,?)");
-        PreparedStatement stmtEmpleado = this.conexion
-                .prepareStatement("INSERT INTO Empleado(legajo, fechaIngreso, rol_id, persona_id)");
         //Cargamos los datos correspondientes a la PERSONA
         stmtPersona.setString(1, empleado.getNombre());
         stmtPersona.setString(2, empleado.getApellido());
@@ -29,14 +29,22 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
         stmtPersona.executeUpdate();
         this.conexion.commit();
 
+        System.out.println("EJECUTAMOS EL PRIMER COMMIT");
 
+        PreparedStatement stmtEmpleado = this.conexion
+                .prepareStatement("INSERT INTO Empleado(fechaIngreso, rol_id, persona_id) VALUES(?,?,?)");
+        System.out.println("PASAMOS EL STATEMENT DE EMPLEADO");
         //Cargamos los datos corresopndientes al Empleado
-        stmtEmpleado.setInt(1, empleado.getLegajo());
-        stmtEmpleado.setDate(2, java.sql.Date.valueOf(empleado.getFechaIngreso()));
-        stmtEmpleado.setInt(3, idRol); //tengo que buscar el id del rol elegido
-        stmtEmpleado.setInt(4, buscarIdUltimaPersonaRegistrada()); //tengo que buscar el id de la persona registrada anteriormente
+        stmtEmpleado.setDate(1, java.sql.Date.valueOf(empleado.getFechaIngreso()));
+        System.out.println("PASAMOS EL PRIMER PARAMETRO");
+        stmtEmpleado.setInt(2, empleado.getRol()); //tengo que buscar el id del rol elegido
+        System.out.println("PASAMOS EL SEGUNDO PARAMETRO");
+        stmtEmpleado.setInt(3, buscarIdUltimaPersonaRegistrada()); //tengo que buscar el id de la persona registrada anteriormente
+        System.out.println("ANTES DE LLEGAR AL 2DO UPDATE");
         stmtEmpleado.executeUpdate();
+        System.out.println("LLEGAMOS HASTA ANTES DEL COMMIT");
         this.conexion.commit();
+        System.out.println("SE EJECUTO TODO CORRECTAMENTE");
     }
 
     @Override
@@ -55,11 +63,12 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
     }
 
     public Integer buscarIdUltimaPersonaRegistrada() throws Exception {
-        this.conectar();
+        //this.conectar();
         PreparedStatement stmt = this.conexion.prepareStatement("SELECT TOP 1 persona_id FROM Persona ORDER BY persona_id DESC");
         ResultSet rs = stmt.executeQuery();
+        System.out.println("Ejecutamos la query");
         rs.next();
-
+        System.out.println("EL id de la ultima persona registrada es: " + rs.getInt("persona_id"));
         return rs.getInt("persona_id");
     }
 }
