@@ -3,8 +3,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="org.joaquinalvarez.anries.dao.DAORolImpl"%>
+<%@page import="org.joaquinalvarez.anries.dao.DAOEmpleadoImpl"%>
 <%@page import="org.joaquinalvarez.anries.interfaces.DAORol"%>
+<%@page import="org.joaquinalvarez.anries.interfaces.DAOEmpleado"%>
 <%@page import="org.joaquinalvarez.anries.model.Rol"%>
+<%@page import="org.joaquinalvarez.anries.model.Empleado"%>
 <%
     Map<String, String> errores = (Map<String, String>)request.getAttribute("errores");
     String confirmacion = (String)request.getAttribute("confirmacion");
@@ -111,6 +114,53 @@
                 <input type="button" id="hidden-button_cancelar" value="Cancelar" class="btn btn-secondary mt-2 visually-hidden">
             </div>
         </form>
+
+        <div class="vr"></div>
+        <table id="tabla-localidades" class="table w-50 me-4 ms-4">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Fecha Ingreso</th>
+                <th scope="col">Nacimiento</th>
+                <th scope="col">Rol</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+            List<Empleado> empleados = new ArrayList<>();
+                DAOEmpleado daoEmpleado = new DAOEmpleadoImpl();
+                empleados = daoEmpleado.listar();
+                for(Empleado empleado: empleados) {
+                for(Rol rol: roles) {
+                if(rol.getId().equals(empleado.getRol())) {
+                %>
+                <tr id="localidad_<%=empleado.getId()%>">
+                    <th class="dato_formulario" scope="row"><%=empleado.getId()%></th>
+                    <td class="dato_formulario"><%=empleado.getNombre()%></td>
+                    <td class="dato_formulario"><%=empleado.getApellido()%></td>
+                    <td class="dato_formulario"><%=empleado.getDireccion()%></td>
+                    <td class="dato_formulario"><%=empleado.getDni()%></td>
+                    <td class="dato_formulario"><%=empleado.getNumeroTelefono()%></td>
+                    <td class="dato_formulario"><%=empleado.getFechaIngreso()%></td>
+                    <td class="dato_formulario"><%=empleado.getFechaNacimiento()%></td>
+                    <td class="dato_formulario"><%=rol.getNombre()%></td>
+                    <td class="d-flex flex-row-reverse flex-shrink-1">
+                        <button type="button" id="button_borrar-<%=empleado.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
+                        <button type="button" id="button_editar-<%=empleado.getId()%>" class="btn btn-outline-success btn-sm button-editar me-2">Editar</button>
+                    </td>
+                </tr>
+                <%}
+                }
+                }%>
+            </tbody>
+        </table>
+
     </div>
 </body>
 

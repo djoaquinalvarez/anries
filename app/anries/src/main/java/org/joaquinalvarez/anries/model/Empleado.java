@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Empleado extends Persona{
+    private Integer id;
     private Integer legajo;
     private LocalDate fechaIngreso;
     private Integer rol;
@@ -24,6 +25,15 @@ public class Empleado extends Persona{
 
     public Empleado() {
         super();
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getLegajo() {
@@ -49,6 +59,7 @@ public class Empleado extends Persona{
     public void setRol(Integer rol) {
         this.rol = rol;
     }
+
 
     public static void registrar(String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String nombreRol) throws Exception {
         Empleado empleado = new Empleado();
