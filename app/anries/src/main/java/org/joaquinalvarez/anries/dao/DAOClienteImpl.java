@@ -5,6 +5,7 @@ import org.joaquinalvarez.anries.model.Cliente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOClienteImpl extends Conexion implements DAOCliente {
@@ -45,7 +46,33 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
 
     @Override
     public List<Cliente> listar() throws Exception {
-        return null;
+        this.conectar();
+        List<Cliente> clientes = new ArrayList<>();
+        PreparedStatement stmtCliente = this.conexion.prepareStatement("SELECT " +
+                "p.nombre, " +
+                "p.apellido, " +
+                "p.direccion, " +
+                "p.dni, " +
+                "p.fechaNacimiento, " +
+                "p.numeroTelefono, " +
+                "c.cliente_id, " +
+                "c.localidad_id " +
+                "FROM Cliente AS c " +
+                "INNER JOIN Persona AS p ON (c.persona_id = p.persona_id)");
+        ResultSet rs = stmtCliente.executeQuery();
+        while(rs.next()){
+            Cliente cliente = new Cliente();
+            cliente.setId(rs.getInt("cliente_id"));
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setApellido(rs.getString("apellido"));
+            cliente.setDireccion(rs.getString("direccion"));
+            cliente.setDni(rs.getInt("dni"));
+            cliente.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+            cliente.setNumeroTelefono(rs.getInt("numeroTelefono"));
+            cliente.setLocalidad(rs.getInt("localidad_id"));
+            clientes.add(cliente);
+        }
+        return clientes;
     }
 
     public Integer buscarIdUltimaPersonaRegistrada() throws Exception {

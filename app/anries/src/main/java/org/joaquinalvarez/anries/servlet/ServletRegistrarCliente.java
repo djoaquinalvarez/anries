@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/form_registrar-cliente")
+@WebServlet("/form_registro-cliente")
 public class ServletRegistrarCliente extends HttpServlet {
 
     @Override

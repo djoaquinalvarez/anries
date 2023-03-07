@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Cliente extends Persona{
+    private Integer id;
     private Integer nroCliente;
     private Integer localidad;
 
@@ -23,6 +24,14 @@ public class Cliente extends Persona{
         super();
         this.nroCliente = nroCliente;
         this.localidad = localidad;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getNroCliente() {

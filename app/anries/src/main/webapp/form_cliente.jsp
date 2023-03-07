@@ -130,6 +130,50 @@
                 <input type="button" id="hidden-button_cancelar" value="Cancelar" class="btn btn-secondary mt-2 visually-hidden">
             </div>
         </form>
+
+        <div class="vr"></div>
+        <table id="tabla-clientes" class="table w-50 me-4 ms-4">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Nacimiento</th>
+                <th scope="col">Localidad</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+            List<Cliente> clientes = new ArrayList<>();
+                DAOCliente daoCliente = new DAOClienteImpl();
+                clientes = daoCliente.listar();
+                for(Cliente cliente: clientes) {
+                    for(Localidad localidad: localidades) {
+                        if(localidad.getId().equals(cliente.getLocalidad())) {
+                %>
+                <tr id="cliente_<%=cliente.getId()%>">
+                    <th class="dato-tabla" scope="row"><%=cliente.getId()%></th>
+                    <td class="dato-tabla"><%=cliente.getNombre()%></td>
+                    <td class="dato-tabla"><%=cliente.getApellido()%></td>
+                    <td class="dato-tabla"><%=cliente.getDireccion()%></td>
+                    <td class="dato-tabla"><%=cliente.getDni()%></td>
+                    <td class="dato-tabla"><%=cliente.getNumeroTelefono()%></td>
+                    <td class="dato-tabla"><%=cliente.getFechaNacimiento()%></td>
+                    <td class="dato-tabla"><%=localidad.getNombre()%></td>
+                    <td class="d-flex flex-row-reverse flex-shrink-1">
+                        <button type="button" id="button_borrar-<%=cliente.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
+                        <button type="button" id="button_editar-<%=cliente.getId()%>" class="btn btn-outline-success btn-sm button-editar me-2">Editar</button>
+                    </td>
+                </tr>
+                <%}
+                }
+                }%>
+            </tbody>
+        </table>
     </div>
 </body>
 
