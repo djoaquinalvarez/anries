@@ -22,6 +22,7 @@ org\joaquinalvarez\anries\interfaces\DAORol.class
 org\joaquinalvarez\anries\model\Articulo.class
 org\joaquinalvarez\anries\dao\DAOClienteImpl.class
 org\joaquinalvarez\anries\interfaces\DAOProvincia.class
+org\joaquinalvarez\anries\servlet\ServletModificarCliente.class
 org\joaquinalvarez\anries\model\Rol.class
 org\joaquinalvarez\anries\dao\DAOLocalidadImpl.class
 org\joaquinalvarez\anries\interfaces\DAOEmpleado.class

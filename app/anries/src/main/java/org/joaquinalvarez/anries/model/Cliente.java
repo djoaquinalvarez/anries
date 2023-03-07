@@ -81,4 +81,40 @@ public class Cliente extends Persona{
             }
         });
     }
+
+    public static void modificar(Integer idCliente, String nombre, String apellido, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String nombreLocalidad) throws Exception {
+        Cliente cliente = new Cliente();
+
+        //Convertimos las fechas en formato LocalDate
+        LocalDate fechaNacimientoTransf = LocalDate.parse(fechaNacimiento);
+
+
+        cliente.setId(idCliente);
+        cliente.setNombre(nombre);
+        cliente.setApellido(apellido);
+        cliente.setDireccion(direccion);
+        cliente.setDni(dni);
+        cliente.setFechaNacimiento(fechaNacimientoTransf);
+        cliente.setNumeroTelefono(numeroTelefono);
+
+        //Buscamos la localidad seleccionada en la base de datos
+        DAOLocalidad daoLocalidad = new DAOLocalidadImpl();
+        List<Localidad> localidades = daoLocalidad.listar();
+        Stream<Localidad> streamLocalidades = localidades.stream();
+        Optional<Localidad> localidadSeleccionada = streamLocalidades
+                .filter(l -> l.getNombre().equals(nombreLocalidad))
+                .findFirst();
+
+        //Persistimos el objeto
+        DAOCliente daoCliente = new DAOClienteImpl();
+        localidadSeleccionada.ifPresent(l -> {
+            try {
+                cliente.setLocalidad(l.getId());
+                daoCliente.modificar(cliente);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        });
+
+    }
 }
