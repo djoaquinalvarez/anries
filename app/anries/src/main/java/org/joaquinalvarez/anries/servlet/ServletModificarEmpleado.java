@@ -52,7 +52,7 @@ public class ServletModificarEmpleado extends HttpServlet {
         if (errores.isEmpty()){
             try{
                 modificar(Integer.valueOf(idEmpleado), nombreEmpleado, apellidoEmpleado, direccion, Integer.valueOf(dni), fechaNacimiento, Integer.valueOf(numeroTelefono), fechaIngreso, rol);
-                mensajeConfirmacion = "Los datos del empleado han sido modificados correctamente";
+                mensajeConfirmacion = "Los datos del empleado han sido modificados correctamente.";
                 req.setAttribute("confirmacion", mensajeConfirmacion);
                 getServletContext().getRequestDispatcher("/form_empleado.jsp").forward(req, resp);
             }catch(Exception e) {
