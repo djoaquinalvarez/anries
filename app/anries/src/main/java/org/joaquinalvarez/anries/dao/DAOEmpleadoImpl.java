@@ -5,6 +5,7 @@ import org.joaquinalvarez.anries.model.Empleado;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.*;
 
@@ -12,9 +13,7 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
 
     @Override
     public void registrar(Empleado empleado) throws Exception {
-        System.out.println("ANTES DEL CONECTAR");
         this.conectar();
-        System.out.println("DESPUES DEL CONECTAR");
         this.conexion.setAutoCommit(false);
         PreparedStatement stmtPersona = this.conexion
                 .prepareStatement("INSERT INTO Persona(nombre, apellido, direccion, " +
@@ -29,26 +28,47 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
         stmtPersona.executeUpdate();
         this.conexion.commit();
 
-        System.out.println("EJECUTAMOS EL PRIMER COMMIT");
-
         PreparedStatement stmtEmpleado = this.conexion
                 .prepareStatement("INSERT INTO Empleado(fechaIngreso, rol_id, persona_id) VALUES(?,?,?)");
-        System.out.println("PASAMOS EL STATEMENT DE EMPLEADO");
         //Cargamos los datos corresopndientes al Empleado
         stmtEmpleado.setDate(1, java.sql.Date.valueOf(empleado.getFechaIngreso()));
-        System.out.println("PASAMOS EL PRIMER PARAMETRO");
         stmtEmpleado.setInt(2, empleado.getRol()); //tengo que buscar el id del rol elegido
-        System.out.println("PASAMOS EL SEGUNDO PARAMETRO");
         stmtEmpleado.setInt(3, buscarIdUltimaPersonaRegistrada()); //tengo que buscar el id de la persona registrada anteriormente
-        System.out.println("ANTES DE LLEGAR AL 2DO UPDATE");
         stmtEmpleado.executeUpdate();
-        System.out.println("LLEGAMOS HASTA ANTES DEL COMMIT");
         this.conexion.commit();
-        System.out.println("SE EJECUTO TODO CORRECTAMENTE");
     }
 
     @Override
     public void modificar(Empleado empleado) throws Exception {
+        this.conectar();
+        this.conexion.setAutoCommit(false);
+        PreparedStatement stmtEmpleado = this.conexion.prepareStatement("UPDATE Empleado SET " +
+                "fechaIngreso = ?," +
+                "rol_id = ? " +
+                "WHERE empleado_id = ?");
+        stmtEmpleado.setDate(1, java.sql.Date.valueOf(empleado.getFechaIngreso()));
+        stmtEmpleado.setInt(2, empleado.getRol());
+        stmtEmpleado.setInt(3, empleado.getId());
+        stmtEmpleado.executeUpdate();
+        this.conexion.commit();
+
+        PreparedStatement stmtPersona = this.conexion.prepareStatement("UPDATE Persona SET nombre = ?,"+
+                "apellido = ?," +
+                "direccion = ?," +
+                "dni = ?," +
+                "numeroTelefono = ?," +
+                "fechaNacimiento = ? " +
+                "WHERE Persona.persona_id = (SELECT persona_id FROM Empleado WHERE empleado_id = ?)");
+        stmtPersona.setString(1, empleado.getNombre());
+        stmtPersona.setString(2, empleado.getApellido());
+        stmtPersona.setString(3, empleado.getDireccion());
+        stmtPersona.setInt(4, empleado.getDni());
+        stmtPersona.setInt(5, empleado.getNumeroTelefono());
+        stmtPersona.setDate(6, java.sql.Date.valueOf(empleado.getFechaNacimiento()));
+        stmtPersona.setInt(7, empleado.getId());
+        stmtPersona.executeUpdate();
+
+        this.conexion.commit();
 
     }
 
@@ -58,17 +78,46 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
     }
 
     @Override
+
     public List<Empleado> listar() throws Exception {
-        return null;
+        List<Empleado> empleados = new ArrayList<>();
+        this.conectar();
+        PreparedStatement stmt = this.conexion.prepareStatement("SELECT " +
+                "e.empleado_id," +
+                "e.rol_id," +
+                "p.nombre," +
+                "p.nombre," +
+                "p.apellido," +
+                "p.direccion," +
+                "p.dni," +
+                "p.fechaNacimiento," +
+                "p.numeroTelefono," +
+                "e.fechaIngreso " +
+                "FROM Persona as p " +
+                "INNER JOIN Empleado AS e ON (e.persona_id = p.persona_id)");
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()) {
+            Empleado empleado = new Empleado();
+            empleado.setId(rs.getInt("empleado_id"));
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setDireccion(rs.getString("direccion"));
+            empleado.setDni(rs.getInt("dni"));
+            empleado.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+            empleado.setNumeroTelefono(rs.getInt("numeroTelefono"));
+            empleado.setFechaIngreso(rs.getDate("fechaIngreso").toLocalDate());
+            empleado.setRol(rs.getInt("rol_id"));
+            empleados.add(empleado);
+        }
+        System.out.println("listado de empleados: " + empleados);
+        return empleados;
     }
 
     public Integer buscarIdUltimaPersonaRegistrada() throws Exception {
         //this.conectar();
         PreparedStatement stmt = this.conexion.prepareStatement("SELECT TOP 1 persona_id FROM Persona ORDER BY persona_id DESC");
         ResultSet rs = stmt.executeQuery();
-        System.out.println("Ejecutamos la query");
         rs.next();
-        System.out.println("EL id de la ultima persona registrada es: " + rs.getInt("persona_id"));
         return rs.getInt("persona_id");
     }
 }

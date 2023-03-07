@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Empleado extends Persona{
+    private Integer id;
     private Integer legajo;
     private LocalDate fechaIngreso;
     private Integer rol;
@@ -24,6 +25,15 @@ public class Empleado extends Persona{
 
     public Empleado() {
         super();
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getLegajo() {
@@ -50,6 +60,7 @@ public class Empleado extends Persona{
         this.rol = rol;
     }
 
+
     public static void registrar(String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String nombreRol) throws Exception {
         Empleado empleado = new Empleado();
         //conversiones de fechas
@@ -75,13 +86,43 @@ public class Empleado extends Persona{
         rolSeleccionado.ifPresent(r -> {
             try {
                 empleado.setRol(r.getId());
-                System.out.println("El rol del empleado es: " + empleado.getRol());
                 daoEmpleado.registrar(empleado);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
+    }
 
+    public static void modificar(Integer idEmpleado, String nombreEmpleado, String apellidoEmpleado, String direccion, Integer dni, String fechaNacimiento, Integer numeroTelefono, String fechaIngreso, String nombreRol) throws Exception {
+        Empleado empleado = new Empleado();
+        //Conversion de fechas
+        LocalDate fechaNacimientoTransf = LocalDate.parse(fechaNacimiento);
+        LocalDate fechaIngresoTransf = LocalDate.parse(fechaIngreso);
 
+        empleado.setId(idEmpleado);
+        empleado.setNombre(nombreEmpleado);
+        empleado.setApellido(apellidoEmpleado);
+        empleado.setDireccion(direccion);
+        empleado.setDni(dni);
+        empleado.setFechaNacimiento(fechaNacimientoTransf);
+        empleado.setNumeroTelefono(numeroTelefono);
+        empleado.setFechaIngreso(fechaIngresoTransf);
+
+        //Buscamos el id del rol seleccionado
+        DAORol daoRol = new DAORolImpl();
+        List<Rol> roles = daoRol.listar();
+        Stream<Rol> streamRoles = roles.stream();
+        Optional<Rol> rolSeleccionado = streamRoles.filter(r -> r.getNombre().equals(nombreRol))
+                .findFirst();
+
+        DAOEmpleado daoEmpleado = new DAOEmpleadoImpl();
+        rolSeleccionado.ifPresent(r -> {
+            try {
+                empleado.setRol(r.getId());
+                daoEmpleado.modificar(empleado);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
