@@ -1,5 +1,7 @@
 org\joaquinalvarez\anries\servlet\ServletModificarLocalidad.class
+org\joaquinalvarez\anries\interfaces\DAOCliente.class
 org\joaquinalvarez\anries\servlet\ServletEliminarProvincia.class
+org\joaquinalvarez\anries\servlet\ServletRegistrarCliente.class
 org\joaquinalvarez\anries\servlet\ServletRegistroLocalidad.class
 org\joaquinalvarez\anries\servlet\ServletModificarEmpleado.class
 org\joaquinalvarez\anries\dao\Conexion.class
@@ -18,6 +20,7 @@ org\joaquinalvarez\anries\model\DetalleCompra.class
 org\joaquinalvarez\anries\forms\Prueba.class
 org\joaquinalvarez\anries\interfaces\DAORol.class
 org\joaquinalvarez\anries\model\Articulo.class
+org\joaquinalvarez\anries\dao\DAOClienteImpl.class
 org\joaquinalvarez\anries\interfaces\DAOProvincia.class
 org\joaquinalvarez\anries\model\Rol.class
 org\joaquinalvarez\anries\dao\DAOLocalidadImpl.class

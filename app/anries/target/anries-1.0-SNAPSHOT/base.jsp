@@ -80,6 +80,20 @@
                         <li><a class="dropdown-item disabled" href="#">Visualizar empleados registrados</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Clientes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="http://localhost:8080/anries/form_cliente.jsp">Registrar nuevo cliente</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Modificar cliente existente</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Eliminar cliente</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item disabled" href="#">Visualizar clientes registrados</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
