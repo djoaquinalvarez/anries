@@ -3,6 +3,7 @@ package org.joaquinalvarez.anries.dao;
 import org.joaquinalvarez.anries.interfaces.DAOCliente;
 import org.joaquinalvarez.anries.model.Cliente;
 
+import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -65,7 +66,26 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
 
     @Override
     public void eliminar(Integer idCliente) throws Exception {
+        this.conectar();
+        this.conexion.setAutoCommit(false);
+        //Recuperamos el id de la persona asociada al cliente antes de eliminarlo
+        PreparedStatement stmtPersonaId = this.conexion.prepareStatement("SELECT persona_id FROM Cliente WHERE cliente_id = ?");
+        stmtPersonaId.setInt(1, idCliente);
+        ResultSet rs = stmtPersonaId.executeQuery();
+        rs.next();
+        this.conexion.commit();
 
+        //Eliminamos la instancia de cliente seleccionada
+        PreparedStatement stmtCliente = this.conexion.prepareStatement("DELETE FROM Cliente WHERE cliente_id = ?");
+        stmtCliente.setInt(1, idCliente);
+        stmtCliente.executeUpdate();
+        this.conexion.commit();
+
+        //Eliminamos la instancia de persona asociada al cliente
+        PreparedStatement stmtPersona = this.conexion.prepareStatement("DELETE FROM Persona WHERE persona_id = ?");
+        stmtPersona.setInt(1, rs.getInt("persona_id"));
+        stmtPersona.executeUpdate();
+        this.conexion.commit();
     }
 
     @Override

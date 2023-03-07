@@ -115,6 +115,10 @@ public class Cliente extends Persona{
                 e.printStackTrace();
             }
         });
+    }
 
+    public static void eliminar(Integer idCliente) throws Exception {
+        DAOCliente daoCliente = new DAOClienteImpl();
+        daoCliente.eliminar(idCliente);
     }
 }
