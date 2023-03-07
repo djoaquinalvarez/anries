@@ -125,4 +125,9 @@ public class Empleado extends Persona{
             }
         });
     }
+
+    public static void eliminar(Integer idEmpleado) throws Exception {
+        DAOEmpleado daoEmpleado = new DAOEmpleadoImpl();
+        daoEmpleado.eliminar(idEmpleado);
+    }
 }

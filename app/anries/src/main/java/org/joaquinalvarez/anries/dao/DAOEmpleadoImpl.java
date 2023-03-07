@@ -74,7 +74,26 @@ public class DAOEmpleadoImpl extends Conexion implements DAOEmpleado  {
 
     @Override
     public void eliminar(Integer idEmpleado) throws Exception {
+        this.conectar();
+        this.conexion.setAutoCommit(false);
 
+        //Rescatamos el id del objeto persona vinculado al empleado ANTES de eliminar al empleado
+        PreparedStatement stmtPersonaId = this.conexion.prepareStatement("SELECT persona_id FROM Empleado WHERE empleado_id = ?");
+        stmtPersonaId.setInt(1, idEmpleado);
+        ResultSet rs = stmtPersonaId.executeQuery();
+        rs.next();
+
+        //Eliminamos al objeto empleado
+        PreparedStatement stmtEmpleado = this.conexion.prepareStatement("DELETE FROM Empleado WHERE empleado_id = ?");
+        stmtEmpleado.setInt(1, idEmpleado);
+        stmtEmpleado.executeUpdate();
+        this.conexion.commit();
+
+        //Eliminamos al objeto Persona asociado al objeto empleado anteriormente eliminado
+        PreparedStatement stmtPersona = this.conexion.prepareStatement("DELETE FROM Persona WHERE persona_id = ?");
+        stmtPersona.setInt(1, rs.getInt("persona_id"));
+        stmtPersona.executeUpdate();
+        this.conexion.commit();
     }
 
     @Override

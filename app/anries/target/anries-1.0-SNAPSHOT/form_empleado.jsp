@@ -33,6 +33,30 @@
          });
     </script>
 
+    <!-- MODAL POPUP PARA CONFIRMACION DE ELIMINACION DE LOCALIDAD-->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <form action="/anries/form_eliminar-empleado" method="post" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar eliminación de empleado</h1>
+                    <input type="hidden" class="dato-servlet" name="id" value="">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal_body-empleado">
+                    ¿Está seguro de borrar a este empleado?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
     <!-- CUERPO DEL ARCHIVO HTML-->
     <div id="navbar-template"></div>
     <h3 class="mt-5 ms-5 mb-4">Formulario de Empleados</h3>

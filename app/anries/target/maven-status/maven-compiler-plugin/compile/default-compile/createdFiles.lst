@@ -12,6 +12,7 @@ org\joaquinalvarez\anries\servlet\ServletRegistroProvincia.class
 org\joaquinalvarez\anries\model\Localidad.class
 org\joaquinalvarez\anries\model\Proveedor.class
 org\joaquinalvarez\anries\model\Compra.class
+org\joaquinalvarez\anries\servlet\ServletEliminarEmpleado.class
 org\joaquinalvarez\anries\servlet\ServletModificarProvincia.class
 org\joaquinalvarez\anries\model\DetalleCompra.class
 org\joaquinalvarez\anries\forms\Prueba.class
