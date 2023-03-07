@@ -46,34 +46,35 @@ function editarLocalidad(evento) {
     }
 }
 
-//----------CARGAMOS EVENTOS CLICK PARA BOTONES BORRAR LOCALIDAD---------------
-/*
+//----------CARGAMOS EVENTOS CLICK PARA BOTONES BORRAR EMPLEADO---------------
+
 $(document).ready(function cargarEventosClicBorrar() {
     var table = document.querySelector("#tabla-empleados");
     var botones = table.querySelectorAll(".button-borrar");
     //console.log(botones);
     for(var i = 0; i < botones.length; i++){
         //console.log(botones[i]);
-        botones[i].addEventListener("click", borrarLocalidad);
+        botones[i].addEventListener("click", borrarEmpleado);
 
     }
 });
 
 
-function borrarLocalidad(evento) {
+function borrarEmpleado(evento) {
     var modal = document.querySelector("#exampleModal");
-    var modalBody = modal.querySelector("#modal_body-localidad");
+    var modalBody = modal.querySelector("#modal_body-empleado");
     var inputId = modal.querySelector(".dato-servlet");
 
     //Buscamos el nombre de la localidad seleccionada
-    var fila = document.querySelector("#localidad_" + evento.target.id.substring(14,)); //seleccionamos cada una de las filas de la tabla
+    var fila = document.querySelector("#empleado_" + evento.target.id.substring(14,)); //seleccionamos cada una de las filas de la tabla
 
-    var datosTabla = fila.querySelectorAll(".dato_formulario"); //separamos la fila en campos individuales
+    var datosTabla = fila.querySelectorAll(".dato-tabla"); //separamos la fila en campos individuales
 
     //Modificamos el titulo del modal segun el nombre de la localidad seleccionada
-    modalBody.textContent = "¿Está seguro de eliminar la localidad de " + datosTabla[1].textContent + "?";
+    console.log("¿Está seguro de eliminar al empleado " + datosTabla[1].textContent + " " + datosTabla[2].textContent + "?");
+    modalBody.textContent = "¿Está seguro de eliminar a " + datosTabla[1].textContent + " " + datosTabla[2].textContent + " de la lista de empleados?";
     inputId.value = datosTabla[0].textContent;
-}*/
+}
 
 $(document).ready(function cargarEventoBotonCancelarEdicion() {
     var buttonHidden = document.querySelector("#hidden-button_cancelar");
