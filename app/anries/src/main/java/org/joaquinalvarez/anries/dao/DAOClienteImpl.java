@@ -36,7 +36,31 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
 
     @Override
     public void modificar(Cliente cliente) throws Exception {
+        this.conectar();
+        this.conexion.setAutoCommit(false);
+        PreparedStatement stmtCliente = this.conexion.prepareStatement("UPDATE Cliente SET localidad_id = ? WHERE cliente_id = ?");
+        stmtCliente.setInt(1, cliente.getLocalidad());
+        stmtCliente.setInt(2, cliente.getId());
+        stmtCliente.executeUpdate();
+        this.conexion.commit();
 
+
+        PreparedStatement stmtPersona = this.conexion.prepareStatement("UPDATE Persona SET nombre = ?,"+
+                "apellido = ?," +
+                "direccion = ?," +
+                "dni = ?," +
+                "numeroTelefono = ?," +
+                "fechaNacimiento = ? " +
+                "WHERE Persona.persona_id = (SELECT persona_id FROM Cliente WHERE cliente_id = ?)");
+        stmtPersona.setString(1, cliente.getNombre());
+        stmtPersona.setString(2, cliente.getApellido());
+        stmtPersona.setString(3, cliente.getDireccion());
+        stmtPersona.setInt(4, cliente.getDni());
+        stmtPersona.setInt(5, cliente.getNumeroTelefono());
+        stmtPersona.setDate(6, java.sql.Date.valueOf(cliente.getFechaNacimiento()));
+        stmtPersona.setInt(7, cliente.getId());
+        stmtPersona.executeUpdate();
+        this.conexion.commit();
     }
 
     @Override
