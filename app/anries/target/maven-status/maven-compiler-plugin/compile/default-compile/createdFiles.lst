@@ -29,6 +29,7 @@ org\joaquinalvarez\anries\interfaces\DAOEmpleado.class
 org\joaquinalvarez\anries\interfaces\DAOLocalidad.class
 org\joaquinalvarez\anries\model\Persona.class
 org\joaquinalvarez\anries\model\Venta.class
+org\joaquinalvarez\anries\servlet\ServletEliminarCliente.class
 org\joaquinalvarez\anries\model\Cliente.class
 org\joaquinalvarez\anries\model\UnidadMedida.class
 org\joaquinalvarez\anries\dao\DAOProvinciaImpl.class
