@@ -1,6 +1,7 @@
 package org.joaquinalvarez.anries.model;
 
 public class Marca {
+    Integer id;
     private String nombre;
     private String descripcion;
     private double porcentajeGanancia;
@@ -14,6 +15,14 @@ public class Marca {
         this.descripcion = descripcion;
         this.porcentajeGanancia = porcentajeGanancia;
         this.proveedor = proveedor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
