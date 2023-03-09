@@ -1,8 +1,10 @@
 package org.joaquinalvarez.anries.model;
 
 
+import org.joaquinalvarez.anries.dao.DAOArticuloImpl;
 import org.joaquinalvarez.anries.dao.DAOMarcaImpl;
 import org.joaquinalvarez.anries.dao.DAOUnidadMedidaImpl;
+import org.joaquinalvarez.anries.interfaces.DAOArticulo;
 import org.joaquinalvarez.anries.interfaces.DAOMarca;
 import org.joaquinalvarez.anries.interfaces.DAOUnidadMedida;
 
