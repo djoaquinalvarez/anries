@@ -78,4 +78,8 @@ public class Articulo {
     public void setMinimaCantidadStock(Integer minimaCantidadStock) {
         this.minimaCantidadStock = minimaCantidadStock;
     }
+
+    public static void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) {
+
+    }
 }
