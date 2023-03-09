@@ -1,7 +1,13 @@
 package org.joaquinalvarez.anries.model;
 
 
+import org.joaquinalvarez.anries.dao.DAOMarcaImpl;
+import org.joaquinalvarez.anries.interfaces.DAOMarca;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Articulo {
+    private Integer id;
     private String nombre;
     private Marca marca;
     private Integer cantidadDisponible;
@@ -21,6 +27,14 @@ public class Articulo {
         this.precioPorUnidad = precioPorUnidad;
         this.unidadMedida = unidadMedida;
         this.minimaCantidadStock = minimaCantidadStock;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -80,6 +94,15 @@ public class Articulo {
     }
 
     public static void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) {
+        Articulo articulo = new Articulo();
+        articulo.setNombre(nombre);
+        articulo.setCantidadDisponible(cantidadDisponible);
+        articulo.setCostoCompra(costoCompra);
+        articulo.setPrecioPorUnidad(precioPorUnidad);
+        articulo.setMinimaCantidadStock(minimaCantidadStock);
+
+        //Buscamos la marca seleccionada en la base de datos
+        DAOMarca daoMarca = new DAOMarcaImpl();
 
     }
 }

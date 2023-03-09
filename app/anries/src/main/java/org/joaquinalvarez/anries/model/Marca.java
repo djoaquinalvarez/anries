@@ -4,12 +4,12 @@ public class Marca {
     private String nombre;
     private String descripcion;
     private double porcentajeGanancia;
-    private Proveedor proveedor;
+    private Integer proveedor;
 
     public Marca() {
     }
 
-    public Marca(String nombre, String descripcion, double porcentajeGanancia, Proveedor proveedor) {
+    public Marca(String nombre, String descripcion, double porcentajeGanancia, Integer proveedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.porcentajeGanancia = porcentajeGanancia;
@@ -40,11 +40,11 @@ public class Marca {
         this.porcentajeGanancia = porcentajeGanancia;
     }
 
-    public Proveedor getProveedor() {
+    public Integer getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(Integer proveedor) {
         this.proveedor = proveedor;
     }
 }
