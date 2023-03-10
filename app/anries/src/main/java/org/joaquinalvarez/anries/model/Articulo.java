@@ -115,6 +115,8 @@ public class Articulo {
         Optional<Marca> marcaSeleccionada = streamMarcas
                 .filter(m -> m.getNombre().equals(nombreMarca))
                 .findFirst();
+        System.out.println(marcaSeleccionada.get().getId());
+        System.out.println(marcaSeleccionada.get().getNombre());
 
         //Seteamos el id de la marca en el articulo
         marcaSeleccionada.ifPresent(m -> {
@@ -137,6 +139,13 @@ public class Articulo {
         unidadSeleccionada.ifPresent(u -> {
             try{
                 articulo.setUnidadMedida(u.getId());
+                System.out.println(articulo.getNombre());
+                System.out.println(articulo.getMarca());
+                System.out.println(articulo.getCantidadDisponible());
+                System.out.println(articulo.getCostoCompra());
+                System.out.println(articulo.getPrecioPorUnidad());
+                System.out.println(articulo.getUnidadMedida());
+                System.out.println(articulo.getMinimaCantidadStock());
                 DAOArticulo daoArticulo = new DAOArticuloImpl();
                 daoArticulo.registrar(articulo);
             }catch(Exception e){

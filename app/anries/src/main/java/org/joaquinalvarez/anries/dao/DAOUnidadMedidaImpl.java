@@ -33,6 +33,7 @@ public class DAOUnidadMedidaImpl extends Conexion implements DAOUnidadMedida {
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             UnidadMedida unidad = new UnidadMedida();
+            unidad.setId(rs.getInt("unidadmedida_id"));
             unidad.setNombre(rs.getString("nombre"));
             unidad.setDescripcion(rs.getString("descripcion"));
             unidades.add(unidad);

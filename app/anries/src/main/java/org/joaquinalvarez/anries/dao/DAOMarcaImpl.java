@@ -33,6 +33,7 @@ public class DAOMarcaImpl extends Conexion implements DAOMarca {
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             Marca marca = new Marca();
+            marca.setId(rs.getInt("marca_id"));
             marca.setNombre(rs.getString("nombre"));
             marca.setDescripcion(rs.getString("descripcion"));
             marca.setPorcentajeGanancia(rs.getDouble("porcentajeGanancia"));

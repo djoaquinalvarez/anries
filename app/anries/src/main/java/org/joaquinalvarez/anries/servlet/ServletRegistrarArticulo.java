@@ -2,15 +2,18 @@ package org.joaquinalvarez.anries.servlet;
 
 import jakarta.faces.validator.DoubleRangeValidator;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.xml.ws.spi.WebServiceFeatureAnnotation;
 import org.joaquinalvarez.anries.model.Articulo;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@WebServlet("/form_registro-articulo")
 public class ServletRegistrarArticulo extends HttpServlet {
 
     @Override
@@ -58,7 +61,7 @@ public class ServletRegistrarArticulo extends HttpServlet {
         }
     }
 
-    public void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock){
+    public void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) throws Exception {
         Articulo.registrar(nombre, nombreMarca, cantidadDisponible, costoCompra, precioPorUnidad, nombreUnidadMedida, minimaCantidadStock);
     }
 }
