@@ -121,13 +121,6 @@ public class Articulo {
         unidadSeleccionada.ifPresent(u -> {
             try{
                 articulo.setUnidadMedida(u.getId());
-                System.out.println(articulo.getNombre());
-                System.out.println(articulo.getMarca());
-                System.out.println(articulo.getCantidadDisponible());
-                System.out.println(articulo.getCostoCompra());
-                System.out.println(articulo.getPrecioPorUnidad());
-                System.out.println(articulo.getUnidadMedida());
-                System.out.println(articulo.getMinimaCantidadStock());
                 DAOArticulo daoArticulo = new DAOArticuloImpl();
                 daoArticulo.registrar(articulo);
             }catch(Exception e){
