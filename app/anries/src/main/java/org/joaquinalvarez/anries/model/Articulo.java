@@ -100,32 +100,14 @@ public class Articulo {
         this.minimaCantidadStock = minimaCantidadStock;
     }
 
-    public static void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) throws Exception {
+    public static void registrar(String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) throws Exception {
         Articulo articulo = new Articulo();
         articulo.setNombre(nombre);
         articulo.setCantidadDisponible(cantidadDisponible);
         articulo.setCostoCompra(costoCompra);
         articulo.setPrecioPorUnidad(precioPorUnidad);
         articulo.setMinimaCantidadStock(minimaCantidadStock);
-
-        //Buscamos la marca seleccionada en la base de datos
-        DAOMarca daoMarca = new DAOMarcaImpl();
-        List<Marca> marcas = daoMarca.listar();
-        Stream<Marca> streamMarcas = marcas.stream();
-        Optional<Marca> marcaSeleccionada = streamMarcas
-                .filter(m -> m.getNombre().equals(nombreMarca))
-                .findFirst();
-        System.out.println(marcaSeleccionada.get().getId());
-        System.out.println(marcaSeleccionada.get().getNombre());
-
-        //Seteamos el id de la marca en el articulo
-        marcaSeleccionada.ifPresent(m -> {
-            try{
-                articulo.setMarca(m.getId());
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        });
+        articulo.setMarca(idMarca);
 
         //Buscamos la unidad de medida seleccionada en la base de datos
         DAOUnidadMedida daoUnidadMedida = new DAOUnidadMedidaImpl();

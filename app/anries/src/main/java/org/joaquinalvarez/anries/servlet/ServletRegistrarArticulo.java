@@ -20,19 +20,26 @@ public class ServletRegistrarArticulo extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String nombre = req.getParameter("nombre");
-        String nombreMarca = req.getParameter("marca");
+        String idMarca = req.getParameter("marca");
         String cantidadDisponible = req.getParameter("cantidadDisponible");
         String costoCompra = req.getParameter("costoCompra");
         String precioPorUnidad = req.getParameter("precioPorUnidad");
         String nombreUnidadMedida = req.getParameter("unidadDeMedida");
         String minimaCantidadStock = req.getParameter("minimaCantidadStock");
+        System.out.println(nombre);
+        System.out.println(idMarca);
+        System.out.println(cantidadDisponible);
+        System.out.println(costoCompra);
+        System.out.println(precioPorUnidad);
+        System.out.println(nombreUnidadMedida);
+        System.out.println(minimaCantidadStock);
 
         Map<String, String> errores = new HashMap<>();
         String mensajeConfirmacion;
 
         if(nombre == null || nombre.equals("")) {
             errores.put("nombre", "El nombre del articulo es requerido.");
-        }else if(nombreMarca == null || nombreMarca.equals("")){
+        }else if(idMarca == null || idMarca.equals("")){
             errores.put("nombreMarca", "La marca del articulo es requerida.");
         }else if(cantidadDisponible == null || cantidadDisponible.equals("")) {
             errores.put("cantidadDisponible", "La cantidad disponible del articulo es requerida.");
@@ -48,7 +55,7 @@ public class ServletRegistrarArticulo extends HttpServlet {
 
         if(errores.isEmpty()) {
             try{
-                registrar(nombre, nombreMarca, Integer.valueOf(cantidadDisponible), Double.valueOf(costoCompra), Double.valueOf(precioPorUnidad), nombreUnidadMedida, Integer.valueOf(minimaCantidadStock));
+                registrar(nombre, Integer.valueOf(idMarca), Integer.valueOf(cantidadDisponible), Double.valueOf(costoCompra), Double.valueOf(precioPorUnidad), nombreUnidadMedida, Integer.valueOf(minimaCantidadStock));
                 mensajeConfirmacion = "El articulo " + nombre + " ha sido registrado correctamente";
                 req.setAttribute("confirmacion", mensajeConfirmacion);
                 getServletContext().getRequestDispatcher("/form_articulo.jsp").forward(req, resp);
@@ -61,7 +68,7 @@ public class ServletRegistrarArticulo extends HttpServlet {
         }
     }
 
-    public void registrar(String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) throws Exception {
-        Articulo.registrar(nombre, nombreMarca, cantidadDisponible, costoCompra, precioPorUnidad, nombreUnidadMedida, minimaCantidadStock);
+    public void registrar(String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidadMedida, Integer minimaCantidadStock) throws Exception {
+        Articulo.registrar(nombre, idMarca, cantidadDisponible, costoCompra, precioPorUnidad, nombreUnidadMedida, minimaCantidadStock);
     }
 }

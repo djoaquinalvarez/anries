@@ -88,7 +88,7 @@
                 }%>
 
                 <label for="precioPorUnidad" class="form-label"><b>Precio por unidad</b></label>
-                <input type="tel" disabled name="precioPorUnidad" id="precioPorUnidad" class="form-control w-75 mb-3 dato-formulario" placeholder="Inserte el precio por unidad del articulo" value="${param.precioPorUnidad}">
+                <input type="tel" readonly name="precioPorUnidad" id="precioPorUnidad" class="form-control w-75 mb-3 dato-formulario disabled" placeholder="Inserte el precio por unidad del articulo" value="${param.precioPorUnidad}">
                 <%
                     if(errores != null && errores.containsKey("precioPorUnidad")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("precioPorUnidad") + "</small>");
