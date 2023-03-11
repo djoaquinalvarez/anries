@@ -4,6 +4,8 @@ import org.joaquinalvarez.anries.interfaces.DAOArticulo;
 import org.joaquinalvarez.anries.model.Articulo;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOArticuloImpl extends Conexion implements DAOArticulo {
@@ -37,6 +39,23 @@ public class DAOArticuloImpl extends Conexion implements DAOArticulo {
 
     @Override
     public List<Articulo> listar() throws Exception {
-        return null;
+        this.conectar();
+        List<Articulo> articulos = new ArrayList<>();
+        this.conexion.setAutoCommit(false);
+        PreparedStatement stmt = this.conexion.prepareStatement("SELECT * FROM Articulo");
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()) {
+            Articulo articulo = new Articulo();
+            articulo.setId(rs.getInt("articulo_id"));
+            articulo.setNombre(rs.getString("nombre"));
+            articulo.setMarca(rs.getInt("marca_id"));
+            articulo.setCantidadDisponible(rs.getInt("cantidadDisponible"));
+            articulo.setCostoCompra(rs.getDouble("costoCompra"));
+            articulo.setPrecioPorUnidad(rs.getDouble("precioPorUnidad"));
+            articulo.setUnidadMedida(rs.getInt("unidadmedida_id"));
+            articulo.setMinimaCantidadStock(rs.getInt("minimaCantidadStock"));
+            articulos.add(articulo);
+        }
+        return articulos;
     }
 }
