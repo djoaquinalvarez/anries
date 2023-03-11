@@ -63,7 +63,7 @@
                     DAOMarca daoMarca = new DAOMarcaImpl();
                     marcas = daoMarca.listar();
                     for(Marca marca: marcas) { %>
-                        <option value="<%=marca.getId()%>"><%=marca.getNombre()%></option>
+                        <option value="<%=marca.getNombre()%>"><%=marca.getNombre()%></option>
                     <%}%>
                 </select>
 
@@ -105,7 +105,7 @@
                     DAOUnidadMedida daoUnidadMedida = new DAOUnidadMedidaImpl();
                     unidades = daoUnidadMedida.listar();
                     for(UnidadMedida unidad: unidades) { %>
-                        <option value="<%=unidad.getId()%>" id="<%=unidad.getId()%>"><%=unidad.getNombre()%></option>
+                        <option value="<%=unidad.getNombre()%>" id="<%=unidad.getId()%>"><%=unidad.getNombre()%></option>
                     <%}%>
                 </select>
 

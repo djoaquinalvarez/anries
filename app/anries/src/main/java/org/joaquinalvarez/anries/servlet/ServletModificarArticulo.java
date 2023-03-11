@@ -60,7 +60,7 @@ public class ServletModificarArticulo extends HttpServlet {
         }
     }
 
-    public void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) {
+    public void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) throws Exception {
         Articulo.modificar(idArticulo, nombre, idMarca, cantidadDisponible, costoCompra, precioPorUnidad, idUnidad, minimaCantidadStock);
     }
 }
