@@ -129,7 +129,18 @@ public class Articulo {
         });
     }
 
-    public static void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) {
+    public static void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) throws Exception {
+        Articulo articulo = new Articulo();
+        articulo.setId(idArticulo);
+        articulo.setNombre(nombre);
+        articulo.setMarca(idMarca);
+        articulo.setCantidadDisponible(cantidadDisponible);
+        articulo.setCostoCompra(costoCompra);
+        articulo.setPrecioPorUnidad(precioPorUnidad);
+        articulo.setUnidadMedida(idUnidad);
+        articulo.setMinimaCantidadStock(minimaCantidadStock);
 
+        DAOArticulo daoArticulo = new DAOArticuloImpl();
+        daoArticulo.registrar(articulo);
     }
 }
