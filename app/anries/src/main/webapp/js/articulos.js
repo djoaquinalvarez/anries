@@ -114,20 +114,56 @@ function cancelarEdicion() {
 function calcularPrecioArticulo(evento) {
     var selectMarcas = document.querySelector("#marca");
     var indiceMarcaSeleccionada = selectMarcas.selectedIndex;
+
     var optionMarcaSeleccionada = selectMarcas.options[indiceMarcaSeleccionada];
+    if(optionMarcaSeleccionada.textContent != "Seleccione la marca del articulo") {
+        var idMarcaSeleccionada = optionMarcaSeleccionada.value;
 
-    var idMarcaSeleccionada = optionMarcaSeleccionada.value;
+        var gananciaMarca = document.querySelector("#ganancia-" + idMarcaSeleccionada).value;
 
-    var gananciaMarca = document.querySelector("#ganancia-" + idMarcaSeleccionada).value;
+        var costoCompra = document.querySelector("#costoCompra").value;
 
-    var costoCompra = document.querySelector("#costoCompra").value;
-    console.log(costoCompra);
-
-    var inputPrecioVenta = document.querySelector("#precioPorUnidad");
-    if(gananciaMarca != 0 && costoCompra != 0) {
-        inputPrecioVenta.value = (Number(costoCompra) + Number(((costoCompra*gananciaMarca)/100)));
+        var inputPrecioVenta = document.querySelector("#precioPorUnidad");
+        if(gananciaMarca != 0 && costoCompra != 0) {
+            inputPrecioVenta.value = (Number(costoCompra) + Number(((costoCompra*gananciaMarca)/100)));
+        }
     }
 
-
 }
+
+    $(document).ready(function cargarEventoBotonEditarPrecio() {
+            var form = document.querySelector("#formulario-articulos");
+            var boton = form.querySelector("#button_editar-precio");
+            //console.log(botones);
+            boton.addEventListener("click", editarPrecio);
+            console.log("verga");
+    });
+
+    function editarPrecio() {
+        var form = document.querySelector("#formulario-articulos");
+        var campoPrecio = form.querySelector("#precioPorUnidad");
+        campoPrecio.removeAttribute("readonly");
+        campoPrecio.focus();
+        console.log("holis");
+
+        var boton = form.querySelector("#button_editar-precio");
+        boton.value = "Restablecer";
+
+        boton.removeEventListener("click", editarPrecio);
+        boton.addEventListener("click", restablecerPrecio);
+    }
+
+    function restablecerPrecio() {
+        var form = document.querySelector("#formulario-articulos");
+        var boton = form.querySelector("#button_editar-precio");
+        var campoPrecio = form.querySelector("#precioPorUnidad");
+        campoPrecio.setAttribute("readonly", "");
+
+        boton.value = "Editar";
+        console.log("holis ahre");
+        calcularPrecioArticulo();
+
+        boton.removeEventListener("click", restablecerPrecio);
+        boton.addEventListener("click", editarPrecio);
+    }
 

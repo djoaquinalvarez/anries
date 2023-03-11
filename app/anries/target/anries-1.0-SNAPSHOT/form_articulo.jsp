@@ -88,7 +88,10 @@
                 }%>
 
                 <label for="precioPorUnidad" class="form-label"><b>Precio por unidad</b></label>
-                <input type="tel" readonly name="precioPorUnidad" id="precioPorUnidad" class="form-control w-75 mb-3 dato-formulario disabled" placeholder="Inserte el precio por unidad del articulo" value="${param.precioPorUnidad}">
+                <div class="d-flex flex-row w-75  mb-3">
+                    <input type="tel" readonly name="precioPorUnidad" id="precioPorUnidad" class="form-control dato-formulario me-2" placeholder="Inserte el precio por unidad del articulo" value="${param.precioPorUnidad}">
+                    <input type="button" id="button_editar-precio" class="btn btn-outline-secondary" value="Editar">
+                </div>
                 <%
                     if(errores != null && errores.containsKey("precioPorUnidad")) {
                     out.println("<small class='alert alert-danger col-sm-4'>"+ errores.get("precioPorUnidad") + "</small>");
