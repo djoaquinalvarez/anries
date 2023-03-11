@@ -29,7 +29,26 @@ public class DAOArticuloImpl extends Conexion implements DAOArticulo {
 
     @Override
     public void modificar(Articulo articulo) throws Exception {
-
+        this.conectar();
+        this.conexion.setAutoCommit(false);
+        PreparedStatement stmt = this.conexion.prepareStatement("UPDATE Articulo SET nombre = ?, " +
+                "marca_id = ?, " +
+                "cantidadDisponible = ?, " +
+                "costoCompra = ?, " +
+                "precioPorUnidad = ?, " +
+                "unidadmedida_id = ?, " +
+                "minimaCantidadStock = ? " +
+                "WHERE articulo_id = ?");
+        stmt.setString(1, articulo.getNombre());
+        stmt.setInt(2, articulo.getMarca());
+        stmt.setInt(3, articulo.getCantidadDisponible());
+        stmt.setDouble(4, articulo.getCostoCompra());
+        stmt.setDouble(5, articulo.getPrecioPorUnidad());
+        stmt.setInt(6, articulo.getUnidadMedida());
+        stmt.setInt(7, articulo.getMinimaCantidadStock());
+        stmt.setInt(8, articulo.getId());
+        stmt.executeUpdate();
+        this.conexion.commit();
     }
 
     @Override
