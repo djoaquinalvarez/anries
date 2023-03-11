@@ -19,11 +19,11 @@ public class ServletModificarArticulo extends HttpServlet {
 
         String idArticulo = req.getParameter("id");
         String nombre = req.getParameter("nombre");
-        String idMarca = req.getParameter("marca");
+        String nombreMarca = req.getParameter("marca");
         String cantidadDisponible = req.getParameter("cantidadDisponible");
         String costoCompra = req.getParameter("costoCompra");
         String precioPorUnidad = req.getParameter("precioPorUnidad");
-        String idUnidad = req.getParameter("unidadDeMedida");
+        String nombreUnidad = req.getParameter("unidadDeMedida");
         String minimaCantidadStock = req.getParameter("minimaCantidadStock");
 
         Map<String, String> errores = new HashMap<>();
@@ -31,7 +31,7 @@ public class ServletModificarArticulo extends HttpServlet {
 
         if(nombre == null || nombre.equals("")) {
             errores.put("nombre", "El nombre del articulo es requerido.");
-        }else if(idMarca == null || idMarca.equals("")){
+        }else if(nombreMarca == null || nombreMarca.equals("")){
             errores.put("nombreMarca", "La marca del articulo es requerida.");
         }else if(cantidadDisponible == null || cantidadDisponible.equals("")) {
             errores.put("cantidadDisponible", "La cantidad disponible del articulo es requerida.");
@@ -39,7 +39,7 @@ public class ServletModificarArticulo extends HttpServlet {
             errores.put("costoCompra","El costo de compra es requerido.");
         }else if(precioPorUnidad == null || precioPorUnidad.equals("")) {
             errores.put("precioPorUnidad","El precio por unidad es requerido.");
-        }else if(idUnidad == null || idUnidad.equals("")) {
+        }else if(nombreUnidad == null || nombreUnidad.equals("")) {
             errores.put("nombreUnidadMedida", "La unidad de medida del articulo es requerida");
         }else if(minimaCantidadStock == null || minimaCantidadStock.equals("")) {
             errores.put("minimaCantidadStock", "La minima cantidad de stock es requerida");
@@ -47,7 +47,7 @@ public class ServletModificarArticulo extends HttpServlet {
 
         if(errores.isEmpty()) {
             try{
-                modificar(Integer.valueOf(idArticulo), nombre, Integer.valueOf(idMarca), Integer.valueOf(cantidadDisponible), Double.valueOf(costoCompra), Double.valueOf(precioPorUnidad), Integer.valueOf(idUnidad), Integer.valueOf(minimaCantidadStock));
+                modificar(Integer.valueOf(idArticulo), nombre, nombreMarca, Integer.valueOf(cantidadDisponible), Double.valueOf(costoCompra), Double.valueOf(precioPorUnidad), nombreUnidad, Integer.valueOf(minimaCantidadStock));
                 mensajeConfirmacion = "Los datos del articulo han sido modificados correctamente.";
                 req.setAttribute("confirmacion", mensajeConfirmacion);
                 getServletContext().getRequestDispatcher("/form_articulo.jsp").forward(req, resp);
@@ -60,7 +60,7 @@ public class ServletModificarArticulo extends HttpServlet {
         }
     }
 
-    public void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) throws Exception {
-        Articulo.modificar(idArticulo, nombre, idMarca, cantidadDisponible, costoCompra, precioPorUnidad, idUnidad, minimaCantidadStock);
+    public void modificar(Integer idArticulo, String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidad, Integer minimaCantidadStock) throws Exception {
+        Articulo.modificar(idArticulo, nombre, nombreMarca, cantidadDisponible, costoCompra, precioPorUnidad, nombreUnidad, minimaCantidadStock);
     }
 }

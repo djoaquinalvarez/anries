@@ -129,18 +129,43 @@ public class Articulo {
         });
     }
 
-    public static void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) throws Exception {
+    public static void modificar(Integer idArticulo, String nombre, String nombreMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, String nombreUnidad, Integer minimaCantidadStock) throws Exception {
         Articulo articulo = new Articulo();
         articulo.setId(idArticulo);
         articulo.setNombre(nombre);
-        articulo.setMarca(idMarca);
         articulo.setCantidadDisponible(cantidadDisponible);
         articulo.setCostoCompra(costoCompra);
         articulo.setPrecioPorUnidad(precioPorUnidad);
-        articulo.setUnidadMedida(idUnidad);
         articulo.setMinimaCantidadStock(minimaCantidadStock);
 
-        DAOArticulo daoArticulo = new DAOArticuloImpl();
-        daoArticulo.registrar(articulo);
+        //Buscamos en la base de datos la marca seleccionada
+        DAOMarca daoMarca = new DAOMarcaImpl();
+        List<Marca> marcas = daoMarca.listar();
+        Stream<Marca> streamMarcas = marcas.stream();
+        Optional<Marca> marcaSeleccionada = streamMarcas.filter(m -> m.getNombre().equals(nombreMarca))
+                .findFirst();
+
+        //Si encontramos la marca, le asignamos el id al articulo
+        marcaSeleccionada.ifPresent(m -> {
+            articulo.setMarca(m.getId());
+        });
+
+        //Buscamos en la base de datos la unidad seleccionada
+        DAOUnidadMedida daoUnidad = new DAOUnidadMedidaImpl();
+        List<UnidadMedida> unidades = daoUnidad.listar();
+        Stream<UnidadMedida> streamUnidades = unidades.stream();
+        Optional<UnidadMedida> unidadSeleccionada = streamUnidades.filter(u -> u.getNombre().equals(nombreUnidad))
+                .findFirst();
+
+        //Si encontramos la marca, le asignamos el id al articulo y lo persistimos
+        unidadSeleccionada.ifPresent(u ->{
+            try{
+                articulo.setUnidadMedida(u.getId());
+                DAOArticulo daoArticulo = new DAOArticuloImpl();
+                daoArticulo.modificar(articulo);
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
