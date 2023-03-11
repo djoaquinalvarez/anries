@@ -1,4 +1,5 @@
 org\joaquinalvarez\anries\servlet\ServletModificarLocalidad.class
+org\joaquinalvarez\anries\servlet\ServletModificarArticulo.class
 org\joaquinalvarez\anries\interfaces\DAOArticulo.class
 org\joaquinalvarez\anries\interfaces\DAOCliente.class
 org\joaquinalvarez\anries\servlet\ServletEliminarProvincia.class

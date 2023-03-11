@@ -1,20 +1,20 @@
 //-----------CARGAMOS EVENTOS EN BOTONES PARA EDITAR LOCALIDAD-------------
-/*
+
 $(document).ready(function cargarEventosClicEditar() {
-    var table = document.querySelector("#tabla-clientes");
+    var table = document.querySelector("#tabla-articulos");
     var botones = table.querySelectorAll(".button-editar");
     //console.log(botones);
     for(var i = 0; i < botones.length; i++){
         //console.log(botones[i]);
-        botones[i].addEventListener("click", editarLocalidad);
+        botones[i].addEventListener("click", editarArticulo);
 
     }
 });
 
-function editarLocalidad(evento) {
+function editarArticulo(evento) {
     //obtenemos la fila de la tabla que contiene los datos de la localidad seleccionada
-    var fila = document.querySelector("#cliente_" + evento.target.id.substring(14,));
-    console.log("#cliente_" + evento.target.id.substring(14,));
+    var fila = document.querySelector("#articulo_" + evento.target.id.substring(14,));
+    console.log("#articulo_" + evento.target.id.substring(14,));
 
 
     //de la tabla, seleccionamos solo aquellos datos que vamos a cargar en los campos
@@ -33,8 +33,8 @@ function editarLocalidad(evento) {
     buttonHidden.classList.remove("visually-hidden");
 
     //cambiamos el action del formulario del modo "Registrar" a "Modificar"
-    var form = document.querySelector("#formulario-clientes");
-    form.action = "/anries/form_modificar-cliente";
+    var form = document.querySelector("#formulario-articulos");
+    form.action = "/anries/form_modificar-articulo";
 
     //por cada valor leido de la tabla, cargamos el contenido de texto en el input del form
     for(var i = 0; i < datosDeTabla.length; i++) {
@@ -42,29 +42,30 @@ function editarLocalidad(evento) {
         var campoARellenar = camposARellenar[i];
         //console.log(datoDeTabla.textContent);
         //console.log(campoARellenar);
-        console.log(datoDeTabla.textContent);
+        console.log("En la tabla hay: " + datoDeTabla.textContent);
         campoARellenar.value = datoDeTabla.textContent;
+        console.log("El input queda en: " + campoARellenar.value);
     }
 }
 
 //----------CARGAMOS EVENTOS CLICK PARA BOTONES BORRAR EMPLEADO---------------
-
+/*
 
 $(document).ready(function cargarEventosClicBorrar() {
-    var table = document.querySelector("#tabla-clientes");
+    var table = document.querySelector("#tabla-articulos");
     var botones = table.querySelectorAll(".button-borrar");
     //console.log(botones);
     for(var i = 0; i < botones.length; i++){
         //console.log(botones[i]);
-        botones[i].addEventListener("click", borrarEmpleado);
+        botones[i].addEventListener("click", borrarArticulo);
 
     }
 });
 
 
-function borrarEmpleado(evento) {
+function borrarArticulo(evento) {
     var modal = document.querySelector("#exampleModal");
-    var modalBody = modal.querySelector("#modal_body-cliente");
+    var modalBody = modal.querySelector("#modal_body-articulo");
     var inputId = modal.querySelector(".dato-servlet");
 
     //Buscamos el nombre de la localidad seleccionada
@@ -75,7 +76,7 @@ function borrarEmpleado(evento) {
     //Modificamos el titulo del modal segun el nombre de la localidad seleccionada
     modalBody.textContent = "¿Está seguro de eliminar a " + datosTabla[1].textContent + " " + datosTabla[2].textContent + " de la lista de clientes?";
     inputId.value = datosTabla[0].textContent;
-}
+}*/
 
 
 $(document).ready(function cargarEventoBotonCancelarEdicion() {
@@ -94,8 +95,8 @@ function cancelarEdicion() {
     buttonSubmit.value = "Enviar";
 
     //vaciamos los campos del formulario]
-    document.querySelector("#formulario-clientes").reset();
-    */
+    document.querySelector("#formulario-articulos").reset();
+ }
 
     $(document).ready(function cargarEventoCampoPrecio() {
         var form = document.querySelector("#formulario-articulos");

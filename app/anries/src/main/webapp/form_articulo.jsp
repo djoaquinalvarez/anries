@@ -63,7 +63,7 @@
                     DAOMarca daoMarca = new DAOMarcaImpl();
                     marcas = daoMarca.listar();
                     for(Marca marca: marcas) { %>
-                        <option value="<%=marca.getId()%>"><%=marca.getNombre()%></option>
+                        <option value="<%=marca.getNombre()%>"><%=marca.getNombre()%></option>
                     <%}%>
                 </select>
 
