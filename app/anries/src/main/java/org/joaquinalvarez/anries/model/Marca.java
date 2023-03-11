@@ -1,19 +1,28 @@
 package org.joaquinalvarez.anries.model;
 
 public class Marca {
+    Integer id;
     private String nombre;
     private String descripcion;
     private double porcentajeGanancia;
-    private Proveedor proveedor;
+    private Integer proveedor;
 
     public Marca() {
     }
 
-    public Marca(String nombre, String descripcion, double porcentajeGanancia, Proveedor proveedor) {
+    public Marca(String nombre, String descripcion, double porcentajeGanancia, Integer proveedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.porcentajeGanancia = porcentajeGanancia;
         this.proveedor = proveedor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -40,11 +49,11 @@ public class Marca {
         this.porcentajeGanancia = porcentajeGanancia;
     }
 
-    public Proveedor getProveedor() {
+    public Integer getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(Integer proveedor) {
         this.proveedor = proveedor;
     }
 }
