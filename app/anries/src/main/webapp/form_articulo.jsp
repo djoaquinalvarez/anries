@@ -129,6 +129,51 @@
                 <input type="button" id="hidden-button_cancelar" value="Cancelar" class="btn btn-secondary mt-2 visually-hidden">
             </div>
         </form>
+        <div class="vr"></div>
+        <table id="tabla-articulos" class="table w-50 me-4 ms-4">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Cantidad disponible</th>
+                <th scope="col">Costo de compra</th>
+                <th scope="col">Precio por unidad</th>
+                <th scope="col">Unidad de medida</th>
+                <th scope="col">Minima cantidad de stock</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+            List<Articulo> articulos = new ArrayList<>();
+                DAOArticulo daoArticulo = new DAOArticuloImpl();
+                articulos = daoArticulo.listar();
+                for(Articulo articulo: articulos) {
+                    for(Marca marca: marcas) {
+                        for(UnidadMedida unidad: unidades){
+                            if(marca.getId().equals(articulo.getMarca()) && unidad.getId().equals(articulo.getUnidadMedida())) {
+                %>
+                <tr id="articulo_<%=articulo.getId()%>">
+                    <th class="dato-tabla" scope="row"><%=articulo.getId()%></th>
+                    <th class="dato-tabla" scope="row"><%=articulo.getNombre()%></th>
+                    <td class="dato-tabla"><%=marca.getNombre()%></td>
+                    <td class="dato-tabla"><%=articulo.getCantidadDisponible()%></td>
+                    <td class="dato-tabla"><%=articulo.getCostoCompra()%></td>
+                    <td class="dato-tabla"><%=articulo.getPrecioPorUnidad()%></td>
+                    <td class="dato-tabla"><%=unidad.getNombre()%></td>
+                    <td class="dato-tabla"><%=articulo.getMinimaCantidadStock()%></td>
+                    <td class="d-flex flex-row-reverse flex-shrink-1">
+                        <button type="button" id="button_borrar-<%=articulo.getId()%>" class="btn btn-outline-danger btn-sm button-borrar"  data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button>
+                        <button type="button" id="button_editar-<%=articulo.getId()%>" class="btn btn-outline-success btn-sm button-editar me-2">Editar</button>
+                    </td>
+                </tr>
+                            <%}
+                        }
+                    }
+                }%>
+            </tbody>
+        </table>
     </div>
 </body>
 
