@@ -128,4 +128,8 @@ public class Articulo {
             }
         });
     }
+
+    public static void modificar(Integer idArticulo, String nombre, Integer idMarca, Integer cantidadDisponible, Double costoCompra, Double precioPorUnidad, Integer idUnidad, Integer minimaCantidadStock) {
+
+    }
 }

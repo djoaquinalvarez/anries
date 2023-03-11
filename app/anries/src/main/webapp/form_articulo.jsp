@@ -105,7 +105,7 @@
                     DAOUnidadMedida daoUnidadMedida = new DAOUnidadMedidaImpl();
                     unidades = daoUnidadMedida.listar();
                     for(UnidadMedida unidad: unidades) { %>
-                        <option value="<%=unidad.getNombre()%>" id="<%=unidad.getId()%>"><%=unidad.getNombre()%></option>
+                        <option value="<%=unidad.getId()%>" id="<%=unidad.getId()%>"><%=unidad.getNombre()%></option>
                     <%}%>
                 </select>
 
