@@ -38,6 +38,24 @@
 
     <!-- MODAL POPUP PARA CONFIRMACION DE ELIMINACION DE LOCALIDAD-->
     <!-- Button trigger modal -->
+    <form action="/anries/form_eliminar-articulo" method="post" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar eliminación de articulo</h1>
+                    <input type="hidden" class="dato-servlet" name="id" value="">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal_body-articulo">
+                    ¿Está seguro de borrar a este articulo?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </div>
+            </div>
+        </div>
+    </form>
 
 
     <!-- CUERPO DEL ARCHIVO HTML-->

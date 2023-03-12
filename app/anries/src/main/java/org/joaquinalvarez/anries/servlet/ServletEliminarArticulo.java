@@ -1,6 +1,7 @@
 package org.joaquinalvarez.anries.servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +9,7 @@ import org.joaquinalvarez.anries.model.Articulo;
 
 import java.io.IOException;
 
+@WebServlet("/form_eliminar-articulo")
 public class ServletEliminarArticulo extends HttpServlet {
 
     @Override
@@ -23,7 +25,7 @@ public class ServletEliminarArticulo extends HttpServlet {
         }
     }
 
-    public void eliminar(Integer idArticulo){
+    public void eliminar(Integer idArticulo) throws Exception {
         Articulo.eliminar(idArticulo);
     }
 }
