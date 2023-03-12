@@ -168,4 +168,9 @@ public class Articulo {
             }
         });
     }
+
+    public static void eliminar(Integer idArticulo) throws Exception {
+        DAOArticulo daoArticulo = new DAOArticuloImpl();
+        daoArticulo.eliminar(idArticulo);
+    }
 }

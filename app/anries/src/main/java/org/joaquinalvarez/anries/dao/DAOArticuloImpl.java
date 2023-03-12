@@ -53,7 +53,10 @@ public class DAOArticuloImpl extends Conexion implements DAOArticulo {
 
     @Override
     public void eliminar(Integer idArticulo) throws Exception {
-
+        this.conectar();
+        PreparedStatement stmt = this.conexion.prepareStatement("DELETE FROM Articulo WHERE articulo_id = ?");
+        stmt.setInt(1, idArticulo);
+        stmt.executeUpdate();
     }
 
     @Override

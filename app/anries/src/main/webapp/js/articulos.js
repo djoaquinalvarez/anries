@@ -49,7 +49,7 @@ function editarArticulo(evento) {
 }
 
 //----------CARGAMOS EVENTOS CLICK PARA BOTONES BORRAR EMPLEADO---------------
-/*
+
 
 $(document).ready(function cargarEventosClicBorrar() {
     var table = document.querySelector("#tabla-articulos");
@@ -68,15 +68,16 @@ function borrarArticulo(evento) {
     var modalBody = modal.querySelector("#modal_body-articulo");
     var inputId = modal.querySelector(".dato-servlet");
 
+    console.log("#articulo" + evento.target.id.substring(14,));
     //Buscamos el nombre de la localidad seleccionada
-    var fila = document.querySelector("#cliente_" + evento.target.id.substring(14,)); //seleccionamos cada una de las filas de la tabla
+    var fila = document.querySelector("#articulo_" + evento.target.id.substring(14,)); //seleccionamos cada una de las filas de la tabla
 
     var datosTabla = fila.querySelectorAll(".dato-tabla"); //separamos la fila en campos individuales
 
     //Modificamos el titulo del modal segun el nombre de la localidad seleccionada
-    modalBody.textContent = "¿Está seguro de eliminar a " + datosTabla[1].textContent + " " + datosTabla[2].textContent + " de la lista de clientes?";
+    modalBody.textContent = "¿Está seguro de eliminar a " + datosTabla[1].textContent + " de la lista de articulos?";
     inputId.value = datosTabla[0].textContent;
-}*/
+}
 
 
 $(document).ready(function cargarEventoBotonCancelarEdicion() {
