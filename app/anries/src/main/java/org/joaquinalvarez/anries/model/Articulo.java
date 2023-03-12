@@ -168,4 +168,8 @@ public class Articulo {
             }
         });
     }
+
+    public static void eliminar(Integer idArticulo){
+
+    }
 }
